@@ -11,9 +11,11 @@ import org.junit.runner.RunWith;
         features = "src/test/resources",
         glue = "stepDefinitions",
         plugin = {
-             "html:target/cucumber-report/report.html"
+                "pretty",
+                "html:target/cucumber-report/report.html"
         },
-        publish = true
+        publish = true,
+        stepNotifications = true
 
 //        ,dryRun = true
 )
