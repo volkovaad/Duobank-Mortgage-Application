@@ -113,9 +113,13 @@ public class SignUpStepDefinitions {
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"));
     }
 
-    @When("the user on the Sign Up page he should see a {string} link")
-    public void the_user_on_the_sign_up_page_he_should_see_a_link(String string) {
+    @When("the user on the Sign Up page he should see a {string} {string} link")
+    public void theUserOnTheSignUpPageHeShouldSeeALink(String string, String str) {
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlToBe("http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php"));
+
         Assert.assertTrue(Driver.getDriver().getPageSource().contains(string));
+        Assert.assertTrue(Driver.getDriver().getPageSource().contains(str));
     }
     @When("the user click on the link")
     public void the_user_click_on_the_link() {
@@ -127,6 +131,7 @@ public class SignUpStepDefinitions {
         wait.until(ExpectedConditions.urlToBe(ConfigReader.getProperty("url")));
         Assert.assertEquals(Driver.getDriver().getCurrentUrl(), (ConfigReader.getProperty("url")));
     }
+
 
 
 }

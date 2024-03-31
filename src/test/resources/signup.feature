@@ -53,7 +53,7 @@ Feature: Sign up for a bank mortgage application
 
 
   Scenario: User clicks on "Already have an account? Sign in" link
-    When the user on the Sign Up page he should see a "Already have an account? Sign in" link
+    When the user on the Sign Up page he should see a "Already have an account?" "Sign in" link
     And the user click on the link
     Then the user should be redirected to the Sign In page
 
