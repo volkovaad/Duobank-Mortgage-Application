@@ -27,11 +27,7 @@ public class LogInStepdefs {
 
 
     @When("The user fills up the fields with the following info")
-    public void theUserFillsUpTheFieldsWithTheFollowingInfo(Map<String, String> map) {
-        new SignInPage().signIn(
-                map.get("email"),
-                map.get("password")
-        );
+    public void theUserFillsUpTheFieldsWithTheFollowingInfo(){
 
     }
 

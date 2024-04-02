@@ -3,6 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utilities.Driver;
@@ -10,7 +11,6 @@ import utilities.Driver;
 import java.time.Duration;
 
 public class Hooks {
-
 
     @Before
     public void setupScenario(){
@@ -24,7 +24,7 @@ public class Hooks {
             scenario.attach(((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES), "image/png", "failed");
         }
 
-        Driver.quitDriver();
+       Driver.quitDriver();
     }
 
 
