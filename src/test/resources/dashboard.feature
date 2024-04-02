@@ -4,10 +4,11 @@ Feature: Access the dashboard page
   As a user who has applied for a mortgage with a bank, I want to be able to access the dashboard page of the bank's mortgage application system
   so that I can view my account information, apply for a new mortgage, and view a list of my previous mortgage applications.
 
+  Background: Common steps for all scenarios
+    Given the user is logged in
+
   Scenario: Viewing the dashboard page
 
-
-    Given the user is logged in
     When the user navigates to the dashboard page
     Then the bank's logo should be displayed in the top left corner
 

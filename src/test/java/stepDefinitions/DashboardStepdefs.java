@@ -17,7 +17,7 @@ public class DashboardStepdefs {
         Driver.getDriver().findElement(By.name("email")).sendKeys("duothechtest@gmail.com", Keys.TAB);
         Driver.getDriver().findElement(By.name("password")).sendKeys("696XR3dfTbf9W", Keys.ENTER);
     }
-    @When("he user navigates to the dashboard page")
+    @When("the user navigates to the dashboard page")
     public void the_user_navigates_to_the_dashboard_page() {
         Assert.assertEquals("http://qa-duobank.us-east-2.elasticbeanstalk.com/dashboard.php", Driver.getDriver().getCurrentUrl());
     }
@@ -41,8 +41,11 @@ public class DashboardStepdefs {
 
 
     @When("the user navigates back to the dashboard page")
-    public void theUserNavigatesBackToTheDashboardPage() {
+    public void theUserNavigatesBackToTheDashboardPage() throws InterruptedException {
+        theUserClicksOnTheMortgageApplicationLink();
+        theUserShouldBeTakenToANewPageForApplyingForANewMortgage();
         Driver.getDriver().navigate().back();
+        Thread.sleep(2000);
         Assert.assertEquals("http://qa-duobank.us-east-2.elasticbeanstalk.com/dashboard.php", Driver.getDriver().getCurrentUrl());
     }
 
