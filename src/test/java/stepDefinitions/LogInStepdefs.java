@@ -26,10 +26,6 @@ public class LogInStepdefs {
     }
 
 
-    @When("The user fills up the fields with the following info")
-    public void theUserFillsUpTheFieldsWithTheFollowingInfo(){
-
-    }
 
     @And("password should be masked")
     public void passwordShouldBeMasked() {
