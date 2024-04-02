@@ -1,3 +1,4 @@
+
 @regression
 Feature: Using the Personal Information page
 
@@ -7,40 +8,26 @@ Feature: Using the Personal Information page
   Background:
     Given user is on the Personal Information page of the mortgage application
 
-  
+  Scenario: User selects yes for the co-borrower's checkbox
+    When I select yes for the co-borrower question
+    Then an additional section for co-borrower's information should be displayed
 
-#  @smoke
-#  Scenario Outline: Providing Personal Information with Co-borrower
-#    When I select <coBorrowerOption> for the co-borrower question
-#    Then I should see an additional section for co-borrower's information
-#    When I fill out the personal information form
-#    And I submit the personal information form
-#    Then I should be able to navigate to the next page
-#    Examples:
-#      | coBorrowerOption |
-#      | "Yes"            |
-#
-#  @smoke
-#  Scenario: Providing Personal Information without Co-borrower
-#
-#    When I select "No" for the co-borrower question
-#    Then I should not see an additional section for co-borrower's information
-#    When I fill out the personal information form
-#    And I submit the personal information form
-#    Then I should be able to navigate to the next page
-#
-#  Scenario Outline: Validating Personal Information Fields
-#
-#    When I enter "<first_name>", "<middle_name>", "<last_name>", "<suffix>", "<email>", "<dob>", "<ssn>", "<marital_status>", "<cell_phone>", and "<home_phone>"
-#    Then I should see the "<field_error_message>" for the corresponding field
-#    Examples:
-#      | first_name | middle_name | last_name | suffix | email                  | dob       | ssn          | marital_status | cell_phone    | home_phone    | field_error_message       |
-#      | John       | M           | Doe       | Jr     | invalid_email@         | 01/01/1990| 123-45-6789 | married        | 123-456-7890 | 987-654-3210 | Invalid email format      |
-#      |            |             |          |        | john.doe@email.com    | 01/01/1990| 123-45-6789 | married        | 123-456-7890 | 987-654-3210 | First name is required    |
-#      | John       |             | Doe       | Jr     | john.doe@email.com    | 01/01/1990| 123-45-6789 | married        | 123-456-7890 | 987-654-3210 | Middle name must be alphabetic |
-#      | John       | M           | Doe       | Jr     | john.doe@email.com    | 01/01/1990| 123-45-6789 | invalid        | 123-456-7890 | 987-654-3210 | Invalid marital status    |
-#      | John       | M           | Doe       | Jr     | john.doe@email.com    | invalid   | 123-45-6789 | married        | 123-456-7890 | 987-654-3210 | Invalid date format       |
-#      | John       | M           | Doe       | Jr     | john.doe@email.com    | 01/01/1990| 123-45-6789 | married        | 123-456-789  | 987-654-3210 | Invalid phone number format |
-#      | John       | M           | Doe       | Jr     | john.doe@email.com    | 01/01/1990| 123-45-6789 | married        | 123-456-7890 | 987-654-321  | Invalid phone number format |
-#      | John       | M           | Doe       | Jr     | john.doe@email.com    | 01/01/1990| 123-45-678  | married        | 123-456-7890 | 987-654-3210 | Invalid SSN format        |
-#      | John       | M           | Doe       | Jr     | john.doe@email.com    | 01/01/1990| 123-45-6789 | single         | 123-456-7890 | 987-654-3210 |                     |
+  Scenario: User selects no for the co-borrower's checkbox
+    When I select no for the co-borrower question
+    Then no additional section for co-borrower's information should be displayed
+
+  Scenario: User fills out borrower's information
+    When I fill out the borrower's information
+
+
+  Scenario: User fills out co-borrower's information
+    And I fill out the co-borrower's information
+
+
+  Scenario: User fills out privacy policy section
+    And the checkbox for accepting the privacy policy should be checked
+
+
+
+  Scenario: User navigates to the next page
+    Then I should navigate to the next page
