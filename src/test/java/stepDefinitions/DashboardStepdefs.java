@@ -60,7 +60,7 @@ public class DashboardStepdefs {
 
     }
 
-    @And("clicking on the user's name or picture should display a dropdown menu")
+    @And("Clicking on the user's name or picture should display a dropdown menu")
     public void clickingOnTheUserSNameOrPictureShouldDisplayADropdownMenu() {
         Driver.getDriver().findElement(By.className("user-name")).click();
         Assert.assertTrue("Dropdown menu is not displayed", Driver.getDriver().findElement(By.className("dropdown-item")).isDisplayed());
