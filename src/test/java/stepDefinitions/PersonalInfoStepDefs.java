@@ -5,8 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import pages.PersonalInfoPage;
-import pages.SignInPage;
 
 public class PersonalInfoStepDefs {
     PersonalInfoPage personalInformationPage;
@@ -16,6 +16,7 @@ public class PersonalInfoStepDefs {
     public void iAmOnThePersonalInformationPageOfTheMortgageApplication() {
         personalInformationPage = new PersonalInfoPage();
         personalInformationPage.open();
+
     }
 
 
@@ -40,9 +41,11 @@ public class PersonalInfoStepDefs {
         Assert.assertFalse(personalInformationPage.isCoBorrowerSectionDisplayed());
     }
 
-    @When("I fill out the borrower's information")
-    public void iFillOutTheBorrowerSInformation() {
+    @And("I fill out the borrower's information")
+    public void iFillOutTheBorrowerSInformation() throws InterruptedException {
         personalInformationPage.enterBorrowersInfo();
+//        personalInformationPage.suffixDropdown();
+        personalInformationPage.marriedDropdown();
 
     }
 
@@ -59,7 +62,7 @@ public class PersonalInfoStepDefs {
 
 
 
-    @Then("I should navigate to the next page")
+    @And("I should navigate to the next page")
     public void iShouldNavigateToTheNextPage() {
         personalInformationPage.submitForm();
         Assert.assertTrue(personalInformationPage.isNextPageDisplayed());

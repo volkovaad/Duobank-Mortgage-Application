@@ -6,24 +6,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import utilities.ConfigReader;
 import utilities.Driver;
 
 
 public class PersonalInfoPage{
-    public PersonalInfoPage() {
+
+    public PersonalInfoPage(){
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
     @FindBy(xpath = "(//span[@class='d-block'])[2]")
     private WebElement personalInformation;
-    @FindBy(id = "coborrower1")
+    @FindBy(xpath = "//label[@for='coborrower1']")
     private WebElement coBorrowerYesCheckbox;
-    @FindBy(id = "coborrower2")
+    @FindBy(xpath = "//label[@for='coborrower2']")
     private WebElement coBorrowerNoCheckbox;
     @FindBy(xpath = "//div[@class='co-borrower']")
     private WebElement coBorrowerSection;
-    @FindBy(id = "b_firstName")
+    @FindBy(name = "b_firstName")
     private WebElement firstName;
     @FindBy(id = "b_middleName")
     private WebElement middleName;
@@ -52,7 +54,7 @@ public class PersonalInfoPage{
     private WebElement coBorrowerMiddleName;
     @FindBy(id = "c_lastName")
     private WebElement coBorrowerLastName;
-    @FindBy(id = "select2-c_suffix-container")
+    @FindBy(xpath = "(//li[@class='select2-results__option'])[2]")
     private WebElement coBorrowerSuffix;
     @FindBy(id = "c_email")
     private WebElement coBorrowerEmail;
@@ -75,15 +77,32 @@ public class PersonalInfoPage{
     private WebElement emailLogin;
     @FindBy(partialLinkText = "Mortgage Application")
     private WebElement mortgageApplication;
+    @FindBy(xpath = "//label[@for='realtor2']")
+    private WebElement noRealtor;
+    @FindBy(xpath="//label[@for='loanofficer2']")
+    private WebElement noLoanOfficer;
+    @FindBy(id="estimatedprice")
+    private WebElement estimatedPrice;
+    @FindBy(id="downpayment")
+    private WebElement downPayment;
+
+
     public void open() {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
-        this.emailLogin.sendKeys("duothechtest@gmail.com", Keys.TAB,"696XR3dfTbf9W", Keys.TAB, Keys.ENTER );
+        this.emailLogin.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,ConfigReader.getProperty("password"), Keys.TAB, Keys.ENTER );
         this.mortgageApplication.click();
-        this.personalInformation.click();
+        this.noRealtor.click();
+        noLoanOfficer.click();
+        estimatedPrice.sendKeys("777777", Keys.ENTER);
+        downPayment.sendKeys("5000",Keys.ENTER);
+        nextButton.click();
     }
+
+
 
     public void selectCoBorrowerYes() {
         coBorrowerYesCheckbox.click();
+
     }
 
     public void selectCoBorrowerNo() {
@@ -95,22 +114,24 @@ public class PersonalInfoPage{
     }
     public void enterBorrowersInfo() {
 
-        this.firstName.sendKeys("Ann");
-        this.middleName.sendKeys("John");
-        this.lastName.sendKeys("Taylor");
-
-        Select suffixDropdown = new Select(this.suffix);
-        suffixDropdown.selectByVisibleText("Jr.");
+        this.firstName.sendKeys("Ann",Keys.ENTER);
+        this.middleName.sendKeys("John",Keys.ENTER);
+        this.lastName.sendKeys("Taylor",Keys.ENTER);
 
         this.coBorrowerEmail.sendKeys(ConfigReader.getProperty("username"));
         this.coBorrowerDob.sendKeys("03/30/2000");
         this.coBorrowerSsn.sendKeys("123456789");
 
-        Select maritalStatusDropdown = new Select(this.coBorrowerMaritalStatus);
-        maritalStatusDropdown.selectByVisibleText("Married");
-
         this.coBorrowerCellphone.sendKeys("1234567890");
         this.coBorrowerHomePhone.sendKeys("1234567890");
+    }
+
+    public void suffixDropdown() throws InterruptedException{
+        Select suffixDropdown = new Select(this.suffix);
+        suffixDropdown.selectByVisibleText("Jr.");
+    }
+    public void marriedDropdown(){
+        new Select(this.coBorrowerMaritalStatus).getFirstSelectedOption();
     }
 
 
