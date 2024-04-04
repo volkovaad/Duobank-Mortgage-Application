@@ -60,18 +60,16 @@ public class PersonalInfoPage{
     private WebElement coBorrowerMiddleName;
     @FindBy(id = "c_lastName")
     private WebElement coBorrowerLastName;
-    @FindBy(xpath = "(//li[@class='select2-results__option'])[2]")
-    private WebElement coBorrowerSuffix;
+
     @FindBy(id = "c_email")
     private WebElement coBorrowerEmail;
     @FindBy(id = "c_dob")
     private WebElement coBorrowerDob;
     @FindBy(id = "c_ssn")
     private WebElement coBorrowerSsn;
-    @FindBy(xpath = "//span[@id='select2-c_marital-container'])")
+    @FindBy(id = "select2-c_marital-container")
     private WebElement coBorrowerMaritalStatus;
-    @FindBy(xpath = "(//span[@title='Married'])[2]")
-    private WebElement coBorrowerMaritalStatusOption;
+
     @FindBy(id = "c_cell")
     private WebElement coBorrowerCellphone;
     @FindBy(id = "c_home")
@@ -154,15 +152,14 @@ public class PersonalInfoPage{
         this.coBorrowerMiddleName.sendKeys(faker.name().nameWithMiddle());
         this.coBorrowerLastName.sendKeys(faker.name().lastName());
 
-        Select suffixDropdown = new Select(this.coBorrowerSuffix);
-        suffixDropdown.selectByVisibleText("Jr.");
-
         this.coBorrowerEmail.sendKeys(faker.internet().emailAddress());
         this.coBorrowerDob.sendKeys(faker.date().birthday().toString());
         this.coBorrowerSsn.sendKeys(faker.idNumber().valid());
-
-        Select maritalStatusDropdown = new Select(this.coBorrowerMaritalStatus);
-        maritalStatusDropdown.selectByVisibleText("Married");
+        this.coBorrowerMaritalStatus.click();
+        WebDriver driver = Driver.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement maritalStatusOption2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-results']/ul/li[contains(text(),'Single')]")));
+        maritalStatusOption2.click();
 
         this.coBorrowerCellphone.sendKeys(faker.phoneNumber().cellPhone());
         this.coBorrowerHomePhone.sendKeys(faker.phoneNumber().phoneNumber());
