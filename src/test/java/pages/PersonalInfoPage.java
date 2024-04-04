@@ -118,12 +118,17 @@ public class PersonalInfoPage{
         this.middleName.sendKeys("John",Keys.ENTER);
         this.lastName.sendKeys("Taylor",Keys.ENTER);
 
-        this.coBorrowerEmail.sendKeys(ConfigReader.getProperty("username"));
-        this.coBorrowerDob.sendKeys("03/30/2000");
-        this.coBorrowerSsn.sendKeys("123456789");
+//        Select suffixDropdown = new Select(this.suffix);
+//        suffixDropdown.selectByVisibleText("Jr.");
 
-        this.coBorrowerCellphone.sendKeys("1234567890");
-        this.coBorrowerHomePhone.sendKeys("1234567890");
+        this.email.sendKeys(ConfigReader.getProperty("username"));
+        this.Dob.sendKeys("03/30/2000");
+        this.ssn.sendKeys("123456789");
+
+        new Select(this.maritalStatus).getFirstSelectedOption();
+
+        this.cellphone.sendKeys("1234567890");
+        this.homePhone.sendKeys("1234567890");
     }
 
     public void suffixDropdown() throws InterruptedException{
@@ -131,7 +136,7 @@ public class PersonalInfoPage{
         suffixDropdown.selectByVisibleText("Jr.");
     }
     public void marriedDropdown(){
-        new Select(this.coBorrowerMaritalStatus).getFirstSelectedOption();
+        new Select(this.maritalStatus).getFirstSelectedOption();
     }
 
 
