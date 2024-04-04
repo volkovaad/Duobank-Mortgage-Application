@@ -1,14 +1,20 @@
 package pages;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.UnexpectedTagNameException;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.Driver;
+
+import java.time.Duration;
 
 
 public class PersonalInfoPage{
@@ -39,13 +45,13 @@ public class PersonalInfoPage{
     private WebElement Dob;
     @FindBy(id = "b_ssn")
     private WebElement ssn;
-    @FindBy(id = "select2-b_marital-container")
+    @FindBy(xpath = "//span[@id='select2-b_marital-container']")
     private WebElement maritalStatus;
     @FindBy(id = "b_cell")
     private WebElement cellphone;
     @FindBy(id = "b_home")
     private WebElement homePhone;
-    @FindBy(id = "privacypolicy")
+    @FindBy(xpath= "//label[@for='privacypolicy']")
     private WebElement privacyPolicyCheckbox;
 
     @FindBy(id = "c_firstName")
@@ -62,8 +68,10 @@ public class PersonalInfoPage{
     private WebElement coBorrowerDob;
     @FindBy(id = "c_ssn")
     private WebElement coBorrowerSsn;
-    @FindBy(id = "select2-c_marital-container")
+    @FindBy(xpath = "//span[@id='select2-c_marital-container'])")
     private WebElement coBorrowerMaritalStatus;
+    @FindBy(xpath = "(//span[@title='Married'])[2]")
+    private WebElement coBorrowerMaritalStatusOption;
     @FindBy(id = "c_cell")
     private WebElement coBorrowerCellphone;
     @FindBy(id = "c_home")
@@ -118,26 +126,21 @@ public class PersonalInfoPage{
         this.middleName.sendKeys("John",Keys.ENTER);
         this.lastName.sendKeys("Taylor",Keys.ENTER);
 
-//        Select suffixDropdown = new Select(this.suffix);
-//        suffixDropdown.selectByVisibleText("Jr.");
-
         this.email.sendKeys(ConfigReader.getProperty("username"));
         this.Dob.sendKeys("03/30/2000");
         this.ssn.sendKeys("123456789");
+        this.maritalStatus.click();
 
-        new Select(this.maritalStatus).getFirstSelectedOption();
+        WebDriver driver = Driver.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement maritalStatusOption = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-results']/ul/li[contains(text(),'Married')]")));
+        maritalStatusOption.click();
+
 
         this.cellphone.sendKeys("1234567890");
         this.homePhone.sendKeys("1234567890");
     }
 
-    public void suffixDropdown() throws InterruptedException{
-        Select suffixDropdown = new Select(this.suffix);
-        suffixDropdown.selectByVisibleText("Jr.");
-    }
-    public void marriedDropdown(){
-        new Select(this.maritalStatus).getFirstSelectedOption();
-    }
 
 
 

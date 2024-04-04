@@ -24,3 +24,5 @@ Feature: Using the Personal Information page
     And the checkbox for accepting the privacy policy should be checked
     And I should navigate to the next page
 
+
+

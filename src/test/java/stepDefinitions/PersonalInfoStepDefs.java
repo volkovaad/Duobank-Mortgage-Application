@@ -44,8 +44,6 @@ public class PersonalInfoStepDefs {
     @And("I fill out the borrower's information")
     public void iFillOutTheBorrowerSInformation() throws InterruptedException {
         personalInformationPage.enterBorrowersInfo();
-//        personalInformationPage.suffixDropdown();
-        personalInformationPage.marriedDropdown();
 
     }
 
