@@ -38,7 +38,7 @@ public class SignUpStepDefinitions {
         Assert.assertTrue(Driver.getDriver().getPageSource().contains(string));
     }
     @Then("the user  should be redirected to the Sign In page")
-    public void redirected_to_the_sign_in_page() throws InterruptedException {
+    public void redirected_to_the_sign_in_page()  {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.urlToBe(ConfigReader.getProperty("url")));
         Assert.assertEquals(Driver.getDriver().getCurrentUrl(), (ConfigReader.getProperty("url")));
@@ -76,7 +76,7 @@ public class SignUpStepDefinitions {
 
     @Then("the user shouldn't be redirected to the Sign In page")
     public void theUserShouldnTBeRedirectedToTheSignInPage() {
-
+ //Assert.assertTrue(new SignUpPage().getEmailmessage().isDisplayed());
        // Assert.assertTrue(new SignUpPage().getEmailerror().isDisplayed());
         Assert.assertEquals("http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php", Driver.getDriver().getCurrentUrl());
     }
@@ -94,7 +94,8 @@ public class SignUpStepDefinitions {
 
     @Then("the user should see an error message")
     public void theUserShouldSeeAnErrorMessage() {
-       Assert.assertTrue(new SignUpPage().getEmailerror().isDisplayed());
+
+        Assert.assertTrue(new SignUpPage().getEmailerror().isDisplayed());
     }
 
 
@@ -132,6 +133,27 @@ public class SignUpStepDefinitions {
         Assert.assertEquals(Driver.getDriver().getCurrentUrl(), (ConfigReader.getProperty("url")));
     }
 
+
+    @When("User enters valid info")
+    public void userEntersValidInfo(Map<String, String> map) throws InterruptedException {
+            Thread.sleep(1000);
+            new SignUpPage().signUpOutline(
+                    map.get("firsName"),
+                    map.get("lastName"),
+                    map.get("password")
+            );
+    }
+    @And("the user enters invalid {string}")
+    public void theUserEntersInvalid(String arg0) {
+        new  SignUpPage().getEmail().sendKeys(arg0);
+    }
+    @Then("the user should see an error")
+    public void theUserShouldSeeAnError() {
+        new  SignUpPage().getRegisterButton().click();
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlToBe("http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php"));
+        Assert.assertEquals("http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php", Driver.getDriver().getCurrentUrl());
+    }
 
 
 }
