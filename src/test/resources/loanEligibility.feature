@@ -8,9 +8,11 @@ Feature: Employment and income details for loan eligibility
   Background: Common steps for all scenarios
       Given the user is on the Employment and Income page
 
+    @bug
   Scenario:   checkbox
     Given The checkbox This is my current job should be unchecked by default
 
+      @smoke
   Scenario: Provide valid Employment and Income Information
 
     Given The user enters valid employment information
@@ -22,13 +24,16 @@ Feature: Employment and income details for loan eligibility
       | end_date     | 09/12/2015      |
 
     And  The user enters gross monthly income as
-      | gross_income       | 15000 |
+      | gross_income       | 15000|
       | overtime           | 2500  |
       | bonuses            | 2000  |
       | commissions        | 0     |
       | dividends_interest | 1000  |
 
-    Then Borrower Total Monthly Income field should be automatically calculated
+    Then The user should be able to move forward
+
+
+    #Borrower Total Monthly Income field should be automatically calculated
 
 #    When I leave the checkbox for "This is my current job" unchecked
 #    And I click on the "Clear" option

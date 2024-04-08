@@ -57,10 +57,8 @@ public class MorEligibStepDefs {
                 map.get("dividends_interest")
         );
     }
-
-
-    @Then("Borrower Total Monthly Income field should be automatically calculated")
-    public void fieldShouldBeAutomaticallyCalculated() {
-
+    @Then("The user should be able to move forward")
+    public void theUserShouldBeAbleToMoveForward() {
+        new EmploymentPage().moveForward();
     }
 }
