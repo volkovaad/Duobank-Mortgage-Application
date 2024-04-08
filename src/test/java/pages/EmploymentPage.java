@@ -72,6 +72,7 @@ public class EmploymentPage {
     public void checkbox(){
         jsClick(currentJobCheck);
     }
+
 public void fillInEmploymentForm(String empName, String postn, String cit, String st, String st_date, String en_date){
     employerName.sendKeys(empName);
     position.sendKeys(postn);
@@ -82,16 +83,21 @@ public void fillInEmploymentForm(String empName, String postn, String cit, Strin
     end_date.sendKeys(en_date);
 }
 
-    public void fillInGrossMonthlyForm(String gross, String over, String bon, String com, String div){
+    public void fillInGrossMonthlyForm(String gross,String over, String bon, String com, String div){
         grossMonthlyIncome.sendKeys(gross);
         monthlyOvertime.sendKeys(over);
         monthlyBonuses.sendKeys(bon);
         monthlyCommission.sendKeys(com);
         monthlyDividents.sendKeys(div);
     }
-
 public void moveForward(){
         next.click();
 }
+
+
+
+
+
+
 
 }
