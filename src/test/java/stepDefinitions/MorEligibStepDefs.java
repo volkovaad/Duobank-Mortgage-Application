@@ -3,6 +3,7 @@ package stepDefinitions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.assertj.core.api.SoftAssertions;
 import pages.EmploymentPage;
 import pages.ExpensesPage;
 import pages.PersonalInfoPage;
@@ -27,12 +28,10 @@ public class MorEligibStepDefs {
 
     @Given("The checkbox This is my current job should be unchecked by default")
     public void theCheckboxLabeledShouldBeUncheckedByDefault() {
+        SoftAssertions softAssertions = new SoftAssertions();
         EmploymentPage employmentPage = new EmploymentPage();
-        if (!employmentPage.getCurrentJobCheck().isSelected()) {
-            System.out.println("Checkbox labeled '" + employmentPage.getCurrentJobCheck() + "' is unchecked by default.");
-        } else {
-            System.out.println("Checkbox labeled '" + employmentPage.getCurrentJobCheck() + "' is checked by default.");
-        }
+        softAssertions.assertThat(employmentPage.getCurrentJobCheck().isSelected()).isFalse();
+        softAssertions.assertAll();
     }
 
     @Given("The user enters valid employment information")

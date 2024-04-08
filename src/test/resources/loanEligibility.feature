@@ -8,8 +8,11 @@ Feature: Employment and income details for loan eligibility
   Background: Common steps for all scenarios
       Given the user is on the Employment and Income page
 
-  Scenario: Provide valid Employment and Income Information
+  Scenario:   checkbox
     Given The checkbox This is my current job should be unchecked by default
+
+  Scenario: Provide valid Employment and Income Information
+
     Given The user enters valid employment information
       | employerName | Google          |
       | position     | SDET            |
