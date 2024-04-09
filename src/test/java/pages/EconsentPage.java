@@ -1,5 +1,6 @@
 package pages;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -90,6 +91,8 @@ public class EconsentPage {
     private WebElement startDate;
     @FindBy(id = "grossmonthlyincome")
     private WebElement grossMonthlyIncome;
+    @FindBy(name = "eConsent_declarer_FirstName")
+    private WebElement nameEConsent;
 
 
 
@@ -123,7 +126,10 @@ public class EconsentPage {
         nextButton.click();
         nextButton.click();
 
-
+    }
+    public void econsentInfo(){
+        Faker faker = new Faker();
+        nameEConsent.sendKeys(faker.name().firstName(), Keys.TAB, faker.name().lastName(), Keys.TAB, faker.internet().emailAddress());
     }
 
 
