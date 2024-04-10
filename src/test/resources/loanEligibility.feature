@@ -1,4 +1,4 @@
-@regression
+@regression @smoke
 Feature: Employment and income details for loan eligibility
 
   As a user applying for a mortgage loan,
@@ -8,11 +8,10 @@ Feature: Employment and income details for loan eligibility
   Background: Common steps for all scenarios
       Given the user is on the Employment and Income page
 
-    @bug
-  Scenario:   checkbox
+  @unsuccessful
+  Scenario:   Checkbox
     Given The checkbox This is my current job should be unchecked by default
 
-      @smoke
   Scenario: Provide valid Employment and Income Information
 
     Given The user enters valid employment information
@@ -24,7 +23,7 @@ Feature: Employment and income details for loan eligibility
       | end_date     | 09/12/2015      |
 
     And  The user enters gross monthly income as
-      | gross_income       | 15000|
+      | gross_income       | 15000 |
       | overtime           | 2500  |
       | bonuses            | 2000  |
       | commissions        | 0     |
@@ -32,51 +31,161 @@ Feature: Employment and income details for loan eligibility
 
     Then The user should be able to move forward
 
+  Scenario:  Required information is valid
+    Given The user enters his employment information
+      | employerName | Google           |
+      | position     | Junior developer |
+      | city         | New York         |
+      | state        | New York (NY)    |
+      | start_date   | 08/13/2009       |
+      | end_date     | 09/12/2015       |
+    And Employer Name should be required
+    And Clear option should be available
+    And user is able to pick the correct state from
+      | Select One        |
+      | Alabama (AL)        |
+      | Alaska (AK)         |
+      | Arizona (AZ)        |
+      | Arkansas (AR)       |
+      | California (CA)     |
+      | Colorado (CO)       |
+      | Connecticut (CT)    |
+      | Delaware (DE)       |
+      | Florida (FL)        |
+      | Georgia (GA)        |
+      | Hawaii (HI)         |
+      | Idaho (ID)          |
+      | Illinois (IL)       |
+      | Indiana (IN)        |
+      | Iowa (IA)           |
+      | Kansas (KS)         |
+      | Kentucky (KY)       |
+      | Louisiana (LA)      |
+      | Maine (ME)          |
+      | Maryland (MD)       |
+      | Massachusetts (MA)  |
+      | Michigan (MI)       |
+      | Minnesota (MN)      |
+      | Mississippi (MS)    |
+      | Missouri (MO)       |
+      | Montana (MT)        |
+      | Nebraska (NE)       |
+      | Nevada (NV)         |
+      | New Hampshire (NH)  |
+      | New Jersey (NJ)     |
+      | New Mexico (NM)     |
+      | New York (NY)       |
+      | North Carolina (NC) |
+      | North Dakota (ND)   |
+      | Ohio (OH)           |
+      | Oklahoma (OK)       |
+      | Oregon (OR)         |
+      | Pennsylvania (PA)   |
+      | Rhode Island (RI)   |
+      | South Carolina (SC) |
+      | South Dakota (SD)   |
+      | Tennessee (TN)      |
+      | Texas (TX)          |
+      | Utah (UT)           |
+      | Vermont (VT)        |
+      | Virginia (VA)       |
+      | Washington (WA)     |
+      | West Virginia (WV)  |
+      | Wisconsin (WI)      |
+      | Wyoming (WY)        |
 
-    #Borrower Total Monthly Income field should be automatically calculated
+    Then user should be able to add another employer
 
-#    When I leave the checkbox for "This is my current job" unchecked
-#    And I click on the "Clear" option
-#    Then a warning pop-up should appear
-#    When I confirm to clear the information
-#    Then all information in the section should be cleared
+ Scenario: Adding another employer
 
-#  Scenario: Add Another Employer Section
-#    Given I have entered information for one employer
-#    When I click on the "Add another employer" button
-#    Then a new section for another employer's information should appear
-#    And it should contain the same fields as the first section
-#    When I click on the "Clear" option in the new section
-#    Then a warning pop-up should appear
-#    When I confirm to clear the information
-#    Then all information in the new section should be cleared
-#    When I click on the "Remove" option in the new section
-#    Then the new section should be removed
-#
+   Given The user enters valid  information for employer 1
+     | employerName | Google          |
+     | position     | SDET            |
+     | city         | Pasadena        |
+     | state        | California (CA) |
+     | start_date   | 08/13/2009      |
+     | end_date     | 09/12/2015      |
 
-#    When I click on the "Clear" option
-#    Then a warning pop-up should appear
-#    When I confirm to clear the information
-#    Then all information in the section should be cleared
-#
-#  Scenario: Provide Additional Gross Monthly Income
-#    Given I select my income source as "<income_source>"
-#    And I enter the amount as "<amount>"
-#    When I click on the "Add another income" button
-#    Then another set of dropdowns and amount fields should appear
-#    And I should be able to enter information for multiple additional income sources
-#
-#  Scenario Outline: Navigate Using Previous and Next Buttons
-#    Given I have filled in all required fields in the previous sections
-#    When I click on the "Next" button
-#    Then I should navigate to the next section
-#    Given I have not filled in all required fields in the current section
-#    When I click on the "Next" button
-#    Then I should see an error message indicating the required field that needs to be filled in
-#    And I should not navigate to the next section
-#
-#    Examples:
-#      | employer        | position  | city        | state | start_date | end_date   | gross_income | overtime | bonuses | commissions | dividends_interest | income_source                     | amount |
-#      | ABC Corporation | Manager   | New York    | NY    | 2022-01-01 | 2023-01-01 | 5000.00      | 100.00   | 200.00  | 300.00      | 100.00             | Alimony/Child Support             | 200.00 |
-#      | XYZ Industries  | Developer | Los Angeles | CA    | 2021-01-01 | 2022-01-01 | 6000.00      | 150.00   | 250.00  | 350.00      | 150.00             | Social Security/Disability Income | 300.00 |
-#
+   Then user should be able to click on add employer button and fill in with valid information
+     | employerName | LalaLend          |
+     | position     | Junior developer  |
+     | city         | Philadelphia      |
+     | state        | Pennsylvania (PA) |
+     | start_date   | 15/12/2015        |
+
+   And Clear option should be available and warning popup should be displayed
+   And user should be able to clear section2
+   Then user fill out employer2 again
+     | employerName | LalaLend          |
+     | position     | Junior developer  |
+     | city         | Philadelphia      |
+     | state        | Pennsylvania (PA) |
+     | start_date   | 15/12/2015        |
+   And the user should be able to clear section1
+   Then Remove option should be available
+
+   @unsuccessful
+  Scenario Outline: Provide invalid Employment Information
+    When The user enters invalid "<employerName>", "<position>", "<city>","<start_date>","<end_date>"
+    Then the user should see an error message or not being able to continue application
+    Examples:
+
+      | employerName | position  | city | start_date | end_date   |
+      | $%dcbkljh    | ef9765fc  | 755  | 09/09/2026 | 09/09/2028 |
+      | $%dcbkljh    | 98754!!y7 | ?/}  | 09/09/2020 | 09/09/2018 |
+      | $%dcbkljh    | #$%&*^$%& | !@3  | 09/15/2020 | 09/09/2021 |
+      |              |           |      |            |            |
+
+  Scenario Outline: The user enters their gross monthly income
+
+    Given User enters valid <gross_income>, <overtime>, <bonuses>, <commissions> and <dividends_interest>
+    And gross income should be required field
+    Then User should have total left
+
+    Examples:
+      | gross_income | overtime | bonuses | commissions | dividends_interest |
+      | 10567.45     | 367.00   | 100     | 0           | 456.87             |
+      | 8567.87      | 500.00   | 500     | 1500        | 543.76             |
+      | 3678.00      | 0.0      | 1000    | 3400        | 865.99             |
+
+@unsuccessful
+Scenario: Input validation
+  Given all fields should accept only numeric input only 12 characters
+
+
+ Scenario: Provide Additional Gross Monthly Income
+   Given The user is able to select  income source from dropdown and able to Add another income
+   Then dropdown should contain
+     | Select One                        |
+     | Alimony/Child Support             |
+     | Social Security/Disability Income |
+     | Unemployment Benefits             |
+     | Interest and Dividends            |
+     | VA Compensation                   |
+     | Royalty Payments                  |
+     | Other Types of Income             |
+
+
+ Scenario: Navigate Using Next Button
+   Given The user filled in all required fields in the previous sections
+     | employerName | Sony       |
+     | start_date   | 15/12/2015 |
+     | gross_income | 6500       |
+   When The user click on the next button
+   Then The user should navigate to the next section
+
+  Scenario: Navigate using Previous Button
+    Given The user is on employment page
+    Then he should be able to navigate back
+
+  Scenario Outline: Unable to navigate using Next Button
+    Given The user not filled in "<employerName>" or "<start_date>" or "<gross_income>"  in the current section
+    When The user click on the next button1
+    Then The user should see an error message indicating the required field that needs to be filled in
+
+    Examples:
+      | employerName | start_date | gross_income |
+      | Sony         |            |              |
+      |              | 15/12/2015 |              |
+      |              |            | 6500         |
+      |              |            |              |
