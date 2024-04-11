@@ -34,7 +34,7 @@ public class PersonalInfoPage{
     @FindBy(name = "b_firstName")
     private WebElement firstName;
     @FindBy(id = "b_middleName")
-    private WebElement middleName;
+    public WebElement middleName;
     @FindBy(id = "b_lastName")
     private WebElement lastName;
     @FindBy(id = "select2-b_suffix-container")
@@ -90,7 +90,7 @@ public class PersonalInfoPage{
     @FindBy(id="estimatedprice")
     private WebElement estimatedPrice;
     @FindBy(id="downpayment")
-    private WebElement downPayment;
+    public WebElement downPayment;
 
 
     public void open() {

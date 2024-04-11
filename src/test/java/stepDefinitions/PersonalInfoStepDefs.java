@@ -66,4 +66,5 @@ public class PersonalInfoStepDefs {
         Assert.assertTrue(personalInformationPage.isNextPageDisplayed());
     }
 
+
 }
