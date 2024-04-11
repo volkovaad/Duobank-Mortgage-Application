@@ -9,7 +9,7 @@ public class EconsentStepDefs {
 
     EconsentPage econsentPage;
     @Given("I am on the E-consent page of the mortgage application")
-    public void iAmOnTheEconsentPageOfTheMortgageApplication() {
+    public void iAmOnTheEconsentPageOfTheMortgageApplication() throws InterruptedException {
 
         econsentPage = new EconsentPage();
         econsentPage.getMyConsentPage();

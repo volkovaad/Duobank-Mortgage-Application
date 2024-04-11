@@ -11,6 +11,6 @@
     Given I am on the E-consent page of the mortgage application
 
     Scenario: The user should be required to fill all fields
-     When The user enter their first and last name and email address
+      When The user enter their first and last name and email address
       Then User should be able to proceed
 

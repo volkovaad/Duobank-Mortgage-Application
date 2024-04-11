@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 
 @CucumberOptions (
 
-        tags = "@regression",
+        tags = "@elshan",
         features = "src/test/resources",
         glue = "stepDefinitions",
         plugin = {

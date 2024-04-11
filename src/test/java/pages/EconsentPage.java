@@ -85,8 +85,12 @@ public class EconsentPage {
     @FindBy(xpath= "//label[@for='privacypolicy']")
     private WebElement privacyPolicyCheckbox;
 
-    @FindBy(name = "monthly_rental_payment")
-    private WebElement placeHolder;
+    @FindBy(id = "monthlyrentalpayment")
+    private WebElement monthlyRent;
+
+
+    @FindBy(id = "employername1")
+    private WebElement employerName;
     @FindBy(id = "start_date1")
     private WebElement startDate;
     @FindBy(id = "grossmonthlyincome")
@@ -96,7 +100,7 @@ public class EconsentPage {
 
 
 
-    public void getMyConsentPage() {
+    public void getMyConsentPage() throws InterruptedException {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
         this.emailLogin.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,ConfigReader.getProperty("password"), Keys.TAB, Keys.ENTER );
         this.mortgageApplication.click();
@@ -105,6 +109,7 @@ public class EconsentPage {
         estimatedPrice.sendKeys("777777", Keys.ENTER);
         downPayment.sendKeys("5000",Keys.ENTER);
         nextButton.click();
+
         this.coBorrowerNoCheckbox.click();
         this.firstName.sendKeys("Ann",Keys.ENTER);
         this.lastName.sendKeys("Taylor",Keys.ENTER);
@@ -119,11 +124,15 @@ public class EconsentPage {
         maritalStatusOption.click();
         privacyPolicyCheckbox.click();
         nextButton.click();
-        this.placeHolder.sendKeys("12345");
+
+        this.monthlyRent.sendKeys("12345");
         nextButton.click();
+
+        this.employerName.sendKeys("abcd");
         this.startDate.sendKeys("20240409");
         this.grossMonthlyIncome.sendKeys("12345");
         nextButton.click();
+        Thread.sleep(2000);
         nextButton.click();
 
     }
