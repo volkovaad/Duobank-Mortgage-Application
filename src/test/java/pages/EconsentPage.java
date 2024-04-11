@@ -1,6 +1,7 @@
 package pages;
 
 import com.github.javafaker.Faker;
+import lombok.Data;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ import utilities.ConfigReader;
 import utilities.Driver;
 
 import java.time.Duration;
-
+@Data
 public class EconsentPage {
 
     public EconsentPage (){
@@ -98,6 +99,25 @@ public class EconsentPage {
     @FindBy(name = "eConsent_declarer_FirstName")
     private WebElement nameEConsent;
 
+    @FindBy(id = "eConsentdeclarerEmail")
+    private WebElement emailConsent;
+
+    @FindBy(id = "eConsentdeclarerEmail-error")
+    private WebElement emailConsentError;
+
+    @FindBy(tagName = "pre")
+    private WebElement disclosures;
+    @FindBy(xpath = "//label[@class='custom-control-label'][text()=\"Agree\"]")
+    private WebElement agreetButton;
+    @FindBy(xpath = "//label[@class='custom-control-label'][text()=\"Don't Agree\"]")
+    private WebElement disAgreetButton;
+
+    @FindBy(id = "consentagree-error")
+    private WebElement errorMessage;
+
+
+
+
 
 
     public void getMyConsentPage() throws InterruptedException {
@@ -140,6 +160,10 @@ public class EconsentPage {
         Faker faker = new Faker();
         nameEConsent.sendKeys(faker.name().firstName(), Keys.TAB, faker.name().lastName(), Keys.TAB, faker.internet().emailAddress());
     }
+    public void clickNextButton(){
+        nextButton.click();
+    }
+
 
 
 
