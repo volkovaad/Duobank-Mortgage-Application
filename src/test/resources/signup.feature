@@ -17,38 +17,38 @@ Feature: Sign up for a bank mortgage application
 
   Scenario: User enters an email address that is already in use
     When The user fills up the fields with the following info as
-      | firsName   |  Ann       |
-      | lastName   |  Johns     |
-      | email      | duothechtest@gmail.com |
-      | password   | 696XR3dfTbf9W          |
+      | firsName | Ann                    |
+      | lastName | Johns                  |
+      | email    | duothechtest@gmail.com |
+      | password | 696XR3dfTbf9W          |
 
     Then the user should see an error message saying "This email already used"
 
   @unsuccessful
   Scenario: User enters invalid email address
     When the user enters an invalid email address
-      | firsName   |  Ann       |
-      | lastName   |  Johns     |
-      | email      | duothechtest |
-      | password   | 696XR3dfTbf9W          |
+      | firsName | Ann           |
+      | lastName | Johns         |
+      | email    | duothechtest  |
+      | password | 696XR3dfTbf9W |
     Then the user shouldn't be redirected to the Sign In page
 
   @unsuccessful
   Scenario: User enters invalid email address1
     When the user enters an invalid email address without .com
-      | firsName   |  Ann       |
-      | lastName   |  Johns     |
-      | email      | duothechtest@gmail |
-      | password   | 696XR3dfTbf9W          |
+      | firsName | Ann                |
+      | lastName | Johns              |
+      | email    | duothechtest@gmail |
+      | password | 696XR3dfTbf9W      |
     Then the user should see an error message
 
   Scenario: User enters a weak password
 
     When the user enters a weak password
-      | firsName   |  Ann       |
-      | lastName   |  Johns     |
-      | email      | duoth1echtest@gmail.com |
-      | password   | 696XR3          |
+      | firsName | Ann                     |
+      | lastName | Johns                   |
+      | email    | duoth1echtest@gmail.com |
+      | password | 696XR3                  |
     Then the user should see an error message for password
 
 
@@ -59,4 +59,18 @@ Feature: Sign up for a bank mortgage application
 
 
 
-
+  @unsuccessful
+  Scenario Outline: The user enters invalid email address
+    When User enters valid info
+      | firsName | Ann           |
+      | lastName | Johns         |
+      | password | 696XR3dfTbf9W |
+    And the user enters invalid "<email>"
+    Then the user should see an error
+    Examples:
+      | email                |
+      | duothechtest         |
+      | missingatsymbol.com  |
+      | missingdomain@.com   |
+      | special@ex@mple.com  |
+      | invalid@example.abcd |

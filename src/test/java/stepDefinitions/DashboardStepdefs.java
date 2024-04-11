@@ -58,8 +58,9 @@ public class DashboardStepdefs {
     }
 
     @And("clicking on the user's name or picture should display a dropdown menu")
-    public void clickingOnTheUserSNameOrPictureShouldDisplayADropdownMenu() {
+    public void clickingOnTheUserSNameOrPictureShouldDisplayADropdownMenu() throws InterruptedException {
         Driver.getDriver().findElement(By.className("user-name")).click();
+        Thread.sleep(1000);
         Assert.assertTrue("Dropdown menu is not displayed", Driver.getDriver().findElement(By.className("dropdown-item")).isDisplayed());
     }
 

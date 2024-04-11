@@ -30,6 +30,8 @@ public class SignUpPage {
     @FindBy(id = "emailerror")
     private WebElement emailerror;
 
+    @FindBy(xpath = "//input[@title='Please enter a valid email address']")
+    private WebElement emailmessage;
 
     public void signUpWithRandomData(){
         Faker faker=  new Faker();
@@ -50,4 +52,11 @@ public class SignUpPage {
         registerButton.click();
     }
 
+    public void signUpOutline(String first, String last, String pwd){
+
+        firstName.sendKeys(first);
+        lastName.sendKeys(last);
+        password.sendKeys(pwd);
+
+    }
 }
