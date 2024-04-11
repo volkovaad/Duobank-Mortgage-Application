@@ -86,21 +86,21 @@ public class ExpensesPage {
 
     public void open() {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
-        this.emailLogin.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,ConfigReader.getProperty("password"), Keys.TAB, Keys.ENTER );
-        this.mortgageApplication.click();
-        this.noRealtor.click();
+        emailLogin.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,ConfigReader.getProperty("password"), Keys.TAB, Keys.ENTER );
+        mortgageApplication.click();
+        noRealtor.click();
         noLoanOfficer.click();
         estimatedPrice.sendKeys("777777", Keys.ENTER);
         downPayment.sendKeys("5000",Keys.ENTER);
         nextButton.click();
-        this.coBorrowerNoCheckbox.click();
-        this.firstName.sendKeys("Ann",Keys.ENTER);
-        this.lastName.sendKeys("Taylor",Keys.ENTER);
-        this.email.sendKeys(ConfigReader.getProperty("username"));
-        this.Dob.sendKeys("03/30/2000");
-        this.ssn.sendKeys("123456789");
-        this.cellphone.sendKeys("1234567890");
-        this.maritalStatus.click();
+        coBorrowerNoCheckbox.click();
+        firstName.sendKeys("Ann",Keys.ENTER);
+        lastName.sendKeys("Taylor",Keys.ENTER);
+        email.sendKeys(ConfigReader.getProperty("username"));
+        Dob.sendKeys("03/30/2000");
+        ssn.sendKeys("123456789");
+        cellphone.sendKeys("1234567890");
+        maritalStatus.click();
         WebDriver driver = Driver.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         WebElement maritalStatusOption = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-results']/ul/li[contains(text(),'Married')]")));
