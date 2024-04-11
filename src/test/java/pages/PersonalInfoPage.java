@@ -34,7 +34,7 @@ public class PersonalInfoPage{
     @FindBy(name = "b_firstName")
     private WebElement firstName;
     @FindBy(id = "b_middleName")
-    private WebElement middleName;
+    public WebElement middleName;
     @FindBy(id = "b_lastName")
     private WebElement lastName;
     @FindBy(id = "select2-b_suffix-container")
@@ -90,14 +90,14 @@ public class PersonalInfoPage{
     @FindBy(id="estimatedprice")
     private WebElement estimatedPrice;
     @FindBy(id="downpayment")
-    private WebElement downPayment;
+    public WebElement downPayment;
 
 
     public void open() {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
-        this.emailLogin.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,ConfigReader.getProperty("password"), Keys.TAB, Keys.ENTER );
-        this.mortgageApplication.click();
-        this.noRealtor.click();
+        emailLogin.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,ConfigReader.getProperty("password"), Keys.TAB, Keys.ENTER );
+        mortgageApplication.click();
+        noRealtor.click();
         noLoanOfficer.click();
         estimatedPrice.sendKeys("777777", Keys.ENTER);
         downPayment.sendKeys("5000",Keys.ENTER);
@@ -120,14 +120,14 @@ public class PersonalInfoPage{
     }
     public void enterBorrowersInfo() {
 
-        this.firstName.sendKeys("Ann",Keys.ENTER);
-        this.middleName.sendKeys("John",Keys.ENTER);
-        this.lastName.sendKeys("Taylor",Keys.ENTER);
+        firstName.sendKeys("Ann",Keys.ENTER);
+        middleName.sendKeys("John",Keys.ENTER);
+        lastName.sendKeys("Taylor",Keys.ENTER);
 
-        this.email.sendKeys(ConfigReader.getProperty("username"));
-        this.Dob.sendKeys("03/30/2000");
-        this.ssn.sendKeys("123456789");
-        this.maritalStatus.click();
+        email.sendKeys(ConfigReader.getProperty("username"));
+        Dob.sendKeys("03/30/2000");
+        ssn.sendKeys("123456789");
+        maritalStatus.click();
 
         WebDriver driver = Driver.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -135,8 +135,8 @@ public class PersonalInfoPage{
         maritalStatusOption.click();
 
 
-        this.cellphone.sendKeys("1234567890");
-        this.homePhone.sendKeys("1234567890");
+        cellphone.sendKeys("1234567890");
+        homePhone.sendKeys("1234567890");
     }
 
 
@@ -148,14 +148,14 @@ public class PersonalInfoPage{
 
     public void enterCoBorrowersInfo() {
         Faker faker=  new Faker();
-        this.coBorrowerFirstName.sendKeys(faker.name().firstName());
-        this.coBorrowerMiddleName.sendKeys(faker.name().nameWithMiddle());
-        this.coBorrowerLastName.sendKeys(faker.name().lastName());
+        coBorrowerFirstName.sendKeys(faker.name().firstName());
+        coBorrowerMiddleName.sendKeys(faker.name().nameWithMiddle());
+        coBorrowerLastName.sendKeys(faker.name().lastName());
 
-        this.coBorrowerEmail.sendKeys(faker.internet().emailAddress());
-        this.coBorrowerDob.sendKeys(faker.date().birthday().toString());
-        this.coBorrowerSsn.sendKeys(faker.idNumber().valid());
-        this.coBorrowerMaritalStatus.click();
+        coBorrowerEmail.sendKeys(faker.internet().emailAddress());
+        coBorrowerDob.sendKeys(faker.date().birthday().toString());
+        coBorrowerSsn.sendKeys(faker.idNumber().valid());
+        coBorrowerMaritalStatus.click();
         WebDriver driver = Driver.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         WebElement maritalStatusOption2 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-results']/ul/li[contains(text(),'Single')]")));
