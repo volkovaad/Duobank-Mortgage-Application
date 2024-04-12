@@ -119,14 +119,14 @@ public class PersonalInfoPage{
         return coBorrowerSection.isDisplayed();
     }
     public void enterBorrowersInfo() {
+        Faker faker=  new Faker();
+        firstName.sendKeys(faker.name().firstName());
+        middleName.sendKeys(faker.name().nameWithMiddle());
+        lastName.sendKeys(faker.name().lastName());
 
-        firstName.sendKeys("Ann",Keys.ENTER);
-        middleName.sendKeys("John",Keys.ENTER);
-        lastName.sendKeys("Taylor",Keys.ENTER);
-
-        email.sendKeys(ConfigReader.getProperty("username"));
-        Dob.sendKeys("03/30/2000");
-        ssn.sendKeys("123456789");
+        email.sendKeys(faker.internet().emailAddress());
+        Dob.sendKeys(faker.date().birthday().toString());
+        ssn.sendKeys(faker.idNumber().valid());
         maritalStatus.click();
 
         WebDriver driver = Driver.getDriver();
@@ -135,8 +135,8 @@ public class PersonalInfoPage{
         maritalStatusOption.click();
 
 
-        cellphone.sendKeys("1234567890");
-        homePhone.sendKeys("1234567890");
+        cellphone.sendKeys(faker.phoneNumber().cellPhone());
+        homePhone.sendKeys(faker.phoneNumber().phoneNumber());
     }
 
 
