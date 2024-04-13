@@ -1,4 +1,4 @@
-@regression
+@regression @smoke @ui_only
 Feature: Using the Applications List page
 
   As a user viewing the Application List,
@@ -25,7 +25,7 @@ Feature: Using the Applications List page
 
   Scenario: User views application details
     When the user selects to view details of a specific application
-    And the details page should display all information entered for that application
+    Then the details page should display all information entered for that application
 
 
 

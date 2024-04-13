@@ -1,14 +1,12 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
 import pages.EconsentPage;
 import utilities.Driver;
-import utilities.SeleniumUtils;
 
 public class EconsentStepDefs {
 

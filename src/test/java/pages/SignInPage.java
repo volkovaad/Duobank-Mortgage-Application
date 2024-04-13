@@ -17,10 +17,13 @@ public class SignInPage {
 
     @FindBy(id = "exampleInputEmail1")
     private WebElement email;
-    @FindBy(xpath = "//input[@id='exampleInputPassword1']")
+    @FindBy(id = "exampleInputPassword1")
     private WebElement password;
     @FindBy(xpath = "//button[@class='btn btn-primary glow w-100 position-relative']")
     private WebElement signInButton;
+
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    private WebElement passwordRequired;
 
     public void signIn(String eMail, String pwd){
 

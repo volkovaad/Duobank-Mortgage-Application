@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.SeleniumUtils;
 
 import static utilities.SeleniumUtils.jsClick;
 
@@ -53,18 +54,22 @@ public class SummaryPage {
         personalInfo.enterBorrowersInfo();
         personalInfo.acceptPrivacyPolicy();
         personalInfo.submitForm();
+        SeleniumUtils.waitForPageToLoad(2000);
 
         ExpensesPage expenses = new ExpensesPage();
         expenses.monthlyRentalPayment();
         expenses.nextElement();
+        SeleniumUtils.waitForPageToLoad(2000);
         EmploymentPage employmentPage = new EmploymentPage();
         employmentPage.checkbox();
         employmentPage.moveForward();
 
+        SeleniumUtils.waitForPageToLoad(2000);
         CreditReportPage creditReportPage = new CreditReportPage();
         creditReportPage.clickNoButton();
         creditReportPage.nextButton();
 
+        SeleniumUtils.waitForPageToLoad(2000);
         firstName.sendKeys("Ann",Keys.TAB,"Taylor",Keys.TAB, ConfigReader.getProperty("username"),Keys.ENTER);
         jsClick(agree);
         next.click();

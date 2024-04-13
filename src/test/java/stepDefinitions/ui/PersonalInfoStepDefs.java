@@ -1,11 +1,10 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.support.ui.UnexpectedTagNameException;
 import pages.PersonalInfoPage;
 
 public class PersonalInfoStepDefs {

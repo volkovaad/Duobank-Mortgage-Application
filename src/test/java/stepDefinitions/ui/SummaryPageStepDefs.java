@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -107,6 +107,7 @@ public class SummaryPageStepDefs {
     public void iShouldBeTakenBackToThePersonalDetailsPage() throws InterruptedException  {
         summaryPage.editPersonalDetails();
         Thread.sleep(1000);
+        SeleniumUtils.waitForPageToLoad(10000);
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("Personal Information"));
     }
 
@@ -114,6 +115,7 @@ public class SummaryPageStepDefs {
     public void iShouldBeTakenBackToTheExpensesPage() throws InterruptedException {
         summaryPage.editExpenses();
         Thread.sleep(1000);
+        SeleniumUtils.waitForPageToLoad(10000);
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("Current Monthly Housing Expenses"));
     }
 
@@ -121,6 +123,7 @@ public class SummaryPageStepDefs {
     public void iShouldBeTakenBackToTheEmploymentAndIncomePage() throws InterruptedException {
         summaryPage.editEmploymentAndIncome();
         Thread.sleep(1000);
+        SeleniumUtils.waitForPageToLoad(10000);
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("Borrower Employment Information"));
     }
 
@@ -128,6 +131,7 @@ public class SummaryPageStepDefs {
     public void iShouldBeTakenBackToTheCreditReportPage()throws InterruptedException  {
         summaryPage.editOrderCredit();
         Thread.sleep(1000);
+        SeleniumUtils.waitForPageToLoad(2000);
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("credit report"));
     }
 
@@ -135,6 +139,7 @@ public class SummaryPageStepDefs {
     public void iShouldBeTakenBackToTheEConsentPage() throws InterruptedException {
         summaryPage.editEConsent();
         Thread.sleep(1000);
+        SeleniumUtils.waitForPageToLoad(2000);
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("Your Consent To Do Business Electronically (the eDisclosure Agreement)"));
     }
 
@@ -151,6 +156,7 @@ public class SummaryPageStepDefs {
 
     @Then("I should be taken back to the start of the mortgage application page")
     public void iShouldBeTakenBackToTheStartOfTheMortgageApplicationPage() {
+        SeleniumUtils.waitForPageToLoad(2000);
         Assert.assertEquals("http://qa-duobank.us-east-2.elasticbeanstalk.com/mortgage.php", Driver.getDriver().getCurrentUrl());
     }
 

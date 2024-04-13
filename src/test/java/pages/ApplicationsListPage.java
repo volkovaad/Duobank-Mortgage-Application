@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.Data;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +10,7 @@ import utilities.ConfigReader;
 import utilities.Driver;
 
 import java.util.List;
-
+@Data
 public class ApplicationsListPage {
 
     public ApplicationsListPage (){

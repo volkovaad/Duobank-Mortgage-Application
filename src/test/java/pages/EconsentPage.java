@@ -14,6 +14,9 @@ import utilities.ConfigReader;
 import utilities.Driver;
 
 import java.time.Duration;
+
+import static utilities.SeleniumUtils.jsClick;
+
 @Data
 public class EconsentPage {
 
@@ -130,7 +133,8 @@ public class EconsentPage {
         downPayment.sendKeys("5000",Keys.ENTER);
         nextButton.click();
 
-        this.coBorrowerNoCheckbox.click();
+        jsClick(this.coBorrowerNoCheckbox);
+       // this.coBorrowerNoCheckbox.click();
         this.firstName.sendKeys("Ann",Keys.ENTER);
         this.lastName.sendKeys("Taylor",Keys.ENTER);
         this.email.sendKeys(ConfigReader.getProperty("username"));

@@ -1,19 +1,12 @@
-package stepDefinitions;
-import io.cucumber.datatable.DataTable;
-import io.cucumber.java.Before;
+package stepDefinitions.ui;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.assertj.core.api.SoftAssertions;
-import org.junit.Assert;
-import org.openqa.selenium.support.ui.Select;
 import pages.CreditReportPage;
 import pages.EmploymentPage;
 import pages.ExpensesPage;
 import pages.PersonalInfoPage;
-
-import java.util.Map;
 
 public class CreditReportStepDefs {
 
@@ -37,7 +30,6 @@ public class CreditReportStepDefs {
         employmentPage.moveForward();
 
     }
-
 
     @When("the user selects {string} to order a credit report")
    public void theUserSelectsToOrderACreditReport(String arg0) {

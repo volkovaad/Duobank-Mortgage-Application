@@ -1,10 +1,11 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.SignInPage;
@@ -35,16 +36,25 @@ public class LogInStepdefs {
 
     }
 
-    @And("password should be masked")
+    @And("password should be masked and required")
     public void passwordShouldBeMasked() {
+
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        boolean isRequired = (Boolean) js.executeScript("return arguments[0].required;",new SignInPage().getPasswordRequired());
+        Assert.assertTrue(isRequired);
 
         Assert.assertEquals("password", new SignInPage().getPassword().getAttribute("type"));
         new SignInPage().getSignInButton().click();
 
-        }
+
+
+    }
 
     @Then("the user should be redirected to the mortgage account dashboard")
     public void theUserShouldBeRedirectedToTheMortgageAccountDashboard() {
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlToBe("http://qa-duobank.us-east-2.elasticbeanstalk.com/dashboard.php"));
         Assert.assertEquals("http://qa-duobank.us-east-2.elasticbeanstalk.com/dashboard.php", Driver.getDriver().getCurrentUrl());
     }
 

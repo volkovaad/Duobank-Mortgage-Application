@@ -1,4 +1,4 @@
-@regression
+@regression @smoke @ui_only
 Feature: Ordering a Credit Report
 
   As a user applying for a mortgage loan

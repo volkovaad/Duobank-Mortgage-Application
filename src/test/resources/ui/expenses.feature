@@ -1,4 +1,4 @@
-@regression
+@regression @ui_only
 Feature: Using the Expenses page
 
   As a potential homebuyer, I want to use the Expenses page of my bank's mortgage application to provide information about my current living situation and expenses

@@ -70,6 +70,25 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.16.1</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>7.16.1</version>
+        </dependency>
 
     </dependencies>
 
@@ -82,10 +101,10 @@
                     <version>3.2.5</version>
                     <configuration>
                         <includes>CucumberRunner.java</includes>
-                        <parallel>methods</parallel>
-                         <useUnlimitedThreads>true</useUnlimitedThreads>
-                         <threadCount>3</threadCount>
-                         <perCoreThreadCount>false</perCoreThreadCount>
+<!--                        <parallel>methods</parallel>-->
+<!--                         <useUnlimitedThreads>true</useUnlimitedThreads>-->
+<!--                         <threadCount>3</threadCount>-->
+<!--                         <perCoreThreadCount>false</perCoreThreadCount>-->
 <!--                        <includes>${runner}</includes>-->
                     </configuration>
 

@@ -1,4 +1,4 @@
-@regression @smoke
+@regression @smoke @ui_only
 Feature: Mortgage Loan Application Summary Page
   As a user applying for a mortgage loan,
   I want to be able to review and edit the details of my loan application on a summary page,

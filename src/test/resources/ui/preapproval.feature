@@ -1,4 +1,4 @@
-@regression
+@regression @ui_only
 Feature: Using the Preapproval Details page
 
   As a potential homebuyer, I want to use the Preapproval Details page of my bank's mortgage application to provide the necessary information

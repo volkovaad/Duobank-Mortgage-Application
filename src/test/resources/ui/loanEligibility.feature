@@ -8,7 +8,7 @@ Feature: Employment and income details for loan eligibility
   Background: Common steps for all scenarios
       Given the user is on the Employment and Income page
 
-  @unsuccessful
+  @unsuccessful @ui_only
   Scenario:   Checkbox
     Given The checkbox This is my current job should be unchecked by default
 

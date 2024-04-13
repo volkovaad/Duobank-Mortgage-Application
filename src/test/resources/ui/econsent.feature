@@ -1,4 +1,4 @@
-@elshan
+@elshan @smoke @ui_only
 
   Feature: Consent to do business electronically
 

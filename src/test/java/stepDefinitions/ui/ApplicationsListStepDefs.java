@@ -1,18 +1,11 @@
-package stepDefinitions;
-import com.github.javafaker.App;
+package stepDefinitions.ui;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.sl.In;
 import org.junit.Assert;
-import org.openqa.selenium.support.ui.Select;
 import pages.ApplicationsListPage;
 import utilities.Driver;
-import utilities.SeleniumUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class ApplicationsListStepDefs {
 
@@ -25,14 +18,9 @@ public class ApplicationsListStepDefs {
         applicationsListPage.open();
 
     }
-
-
-    @When("the user enters {string} in the search field")
-    public void userEntersSearchTerm(String searchTerm) {
-
-
-
-    }
+//    @When("the user enters {string} in the search field")
+//    public void userEntersSearchTerm(String searchTerm) {
+//    }
 
     @Then("the list of applications should display matching entries")
     public void verifyMatchingEntries() throws InterruptedException {
@@ -42,7 +30,7 @@ public class ApplicationsListStepDefs {
 
     }
 
-    @Then("each entry should display loan id, borrower name, loan amount, and loan details")
+    @And("each entry should display loan id, borrower name, loan amount, and loan details")
     public void verifyDisplayedData() throws InterruptedException{
 
         Thread.sleep(2000);
@@ -50,8 +38,11 @@ public class ApplicationsListStepDefs {
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("Bob"));
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("123000.00"));
 
+
     }
 
+
+//      Scenario: User views application details
     @When("the user selects to view details of a specific application")
     public void userSelectsViewDetails() {
 
@@ -69,10 +60,11 @@ public class ApplicationsListStepDefs {
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("Pasadena"));
         Assert.assertTrue(Driver.getDriver().getPageSource().contains("Google"));
 
+
     }
 
 
-    @When("the user selects to show <entriesPerPage> entries per page")
-    public void theUserSelectsToShowEntriesPerPageEntriesPerPage() {
-    }
+//    @When("the user selects to show <entriesPerPage> entries per page")
+//    public void theUserSelectsToShowEntriesPerPageEntriesPerPage() {
+//    }
 }

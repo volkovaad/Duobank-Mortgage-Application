@@ -1,13 +1,11 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
-import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
 import pages.EmploymentPage;
 import pages.ExpensesPage;
 import pages.PersonalInfoPage;
