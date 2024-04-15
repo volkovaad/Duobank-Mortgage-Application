@@ -18,44 +18,29 @@ import java.time.Duration;
 import static utilities.SeleniumUtils.jsClick;
 
 @Data
-public class EconsentPage {
+public class PreapprovalPage {
+    public PreapprovalPage() {PageFactory.initElements(Driver.getDriver(), this);}
 
-    public EconsentPage (){
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
-
-
-
-    @FindBy(xpath = "//label[@for='expense1']")
-    private WebElement rentCheckbox;
-    @FindBy(xpath = "//label[@for='expense2']")
-    private WebElement ownCheckbox;
-    @FindBy(name = "monthly_rental_payment")
-    private WebElement monthlyRentalPayment;
-
-    @FindBy(name = "first_mortagage_total_payment")
-    private WebElement monthlyMortgagePayment;
-
-    @FindBy(partialLinkText = "Next")
-    private WebElement nextButton;
-    @FindBy(partialLinkText = "Previous")
-    private WebElement previousButton;
-
-    //div[@class='checkbox checkbox-danger checkbox-glow']//label['after'][1]
 
     @FindBy(id = "exampleInputEmail1")
     private WebElement emailLogin;
     @FindBy(partialLinkText = "Mortgage Application")
     private WebElement mortgageApplication;
-    @FindBy(xpath = "//label[@for='realtor2']")
-    private WebElement noRealtor;
-    @FindBy(xpath="//label[@for='loanofficer2']")
-    private WebElement noLoanOfficer;
+    @FindBy(xpath = "//label[@for='realtor1']")
+    private WebElement yesRealtor;
+    @FindBy(name = "realtor_info")
+    private WebElement realtorInfo;
+    @FindBy(xpath="//label[@for='loanofficer1']")
+    private WebElement yesLoanOfficer;
     @FindBy(id="estimatedprice")
     private WebElement estimatedPrice;
     @FindBy(id="downpayment")
     private WebElement downPayment;
+    @FindBy(name = "add_fund_available")
+    private WebElement findAvailable;
 
+    @FindBy(partialLinkText = "Next")
+    private WebElement nextButton;
 
 
     @FindBy(xpath = "(//span[@class='d-block'])[2]")
@@ -89,6 +74,7 @@ public class EconsentPage {
     @FindBy(xpath= "//label[@for='privacypolicy']")
     private WebElement privacyPolicyCheckbox;
 
+
     @FindBy(id = "monthlyrentalpayment")
     private WebElement monthlyRent;
 
@@ -104,36 +90,27 @@ public class EconsentPage {
     private WebElement nameEConsent;
     @FindBy(id = "eConsentdeclarerEmail")
     private WebElement emailConsent;
-    @FindBy(id = "eConsentdeclarerEmail-error")
-    private WebElement emailConsentError;
 
-    @FindBy(tagName = "pre")
-    private WebElement disclosures;
-    @FindBy(xpath = "//label[@class='custom-control-label'][text()=\"Agree\"]")
-    private WebElement agreetButton;
-    @FindBy(xpath = "//label[@class='custom-control-label'][text()=\"Don't Agree\"]")
-    private WebElement disAgreetButton;
-
-    @FindBy(id = "consentagree-error")
-    private WebElement errorMessage;
+    @FindBy(linkText = "Save")
+    private WebElement saveButton;
 
 
 
 
-
-
-    public void getMyConsentPage() throws InterruptedException {
+    public void preapproval(String realtor, String estimPrice, String downP, String fundAv ) throws InterruptedException{
         Driver.getDriver().get(ConfigReader.getProperty("url"));
-        this.emailLogin.sendKeys(ConfigReader.getProperty("username"), Keys.TAB,ConfigReader.getProperty("password"), Keys.TAB, Keys.ENTER );
-        this.mortgageApplication.click();
-        this.noRealtor.click();
-        noLoanOfficer.click();
-        estimatedPrice.sendKeys("777777", Keys.ENTER);
-        downPayment.sendKeys("5000",Keys.ENTER);
+        emailLogin.sendKeys(ConfigReader.getProperty("username"), Keys.TAB, ConfigReader.getProperty("password"), Keys.TAB, Keys.ENTER);
+        mortgageApplication.click();
+        yesRealtor.click();
+        realtorInfo.sendKeys(realtor);
+        yesLoanOfficer.click();
+        estimatedPrice.sendKeys(estimPrice, Keys.ENTER);
+        downPayment.sendKeys(downP,Keys.ENTER);
+        findAvailable.sendKeys(fundAv);
         nextButton.click();
 
         jsClick(this.coBorrowerNoCheckbox);
-       // this.coBorrowerNoCheckbox.click();
+        // this.coBorrowerNoCheckbox.click();
         this.firstName.sendKeys("Ann",Keys.ENTER);
         this.lastName.sendKeys("Taylor",Keys.ENTER);
         this.email.sendKeys(ConfigReader.getProperty("username"));
@@ -158,13 +135,11 @@ public class EconsentPage {
         Thread.sleep(2000);
         nextButton.click();
 
+
     }
     public void econsentInfo(){
         Faker faker = new Faker();
         nameEConsent.sendKeys(faker.name().firstName(), Keys.TAB, faker.name().lastName(), Keys.TAB, faker.internet().emailAddress());
-    }
-    public void clickNextButton(){
-        nextButton.click();
     }
 
 
