@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 @Data
 public class SharedData {
 
+
    private String realtor;
    private String estimPrice;
    private String downP;
@@ -13,4 +14,5 @@ public class SharedData {
 
 
 
+ main
 }

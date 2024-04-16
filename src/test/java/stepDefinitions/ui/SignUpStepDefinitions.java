@@ -1,21 +1,32 @@
 package stepDefinitions.ui;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.Data;
 import org.junit.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.SignInPage;
 import pages.SignUpPage;
+import stepDefinitions.SharedData;
 import utilities.ConfigReader;
 import utilities.Driver;
 
 import java.time.Duration;
 import java.util.Map;
-
+@Data
 public class SignUpStepDefinitions {
+    private String first_name_faker;
+    private String last_name_faker;
+    private String email_faker;
+    private String pwd_faker;
+ //   SharedData sharedData;
+//    public SignUpStepDefinitions(SharedData sharedData) {
+//        this.sharedData = sharedData;
+//    }
 
     @Given("the user is on the login page")
   public void theUserIsOnTheHomepage() {
@@ -152,6 +163,22 @@ public class SignUpStepDefinitions {
         wait.until(ExpectedConditions.urlToBe("http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php"));
         Assert.assertEquals("http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php", Driver.getDriver().getCurrentUrl());
     }
+
+
+    @When("user signUp with random data")
+    public void signUpwithrandomdataFaker(){
+        Faker faker = new Faker();
+     first_name_faker = (faker.name().firstName());
+        new SignUpPage().getFirstName().sendKeys(first_name_faker);
+     last_name_faker = (faker.name().lastName());
+        new SignUpPage().getLastName().sendKeys(last_name_faker);
+     email_faker = (faker.internet().emailAddress());
+        new SignUpPage().getEmail().sendKeys(email_faker);
+     pwd_faker = "GHnjgh647v";
+        new SignUpPage().getPassword().sendKeys(pwd_faker);
+        new SignUpPage().getRegisterButton().click();
+    }
+
 
 
 }
