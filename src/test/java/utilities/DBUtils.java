@@ -10,6 +10,7 @@ public class DBUtils {
     private static Connection connection;
     private static Statement statement;
     private static ResultSet resultSet;
+
     public static void createConnection() {
         String url = ConfigReader.getProperty("db.url");
         String user = ConfigReader.getProperty("db.username");
@@ -35,7 +36,7 @@ public class DBUtils {
             throw new RuntimeException(e);
         }
     }
-    private static void executeQuery(String query) {
+    public static void executeQuery(String query) {
         try {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             resultSet = statement.executeQuery(query);
