@@ -1,13 +1,18 @@
 package stepDefinitions;
 
 import lombok.Data;
+import org.openqa.selenium.WebElement;
 
 @Data
 public class SharedData {
 
-//    private String first_name_faker;
-//    private String last_name_faker;
-//    private String email_faker;
-//    private String pwd_faker;
-//    private  String emailFaker;
+
+   private String realtor;
+   private String estimPrice;
+   private String downP;
+   private String fundAv;
+
+
+
+ main
 }
