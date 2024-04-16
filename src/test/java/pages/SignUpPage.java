@@ -5,7 +5,9 @@ import lombok.Data;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import stepDefinitions.SharedData;
 import utilities.Driver;
+
 @Data
 public class SignUpPage {
 
@@ -35,9 +37,10 @@ public class SignUpPage {
 
     public void signUpWithRandomData(){
         Faker faker=  new Faker();
-        firstName.sendKeys(faker.name().firstName());
-        lastName.sendKeys(faker.name().lastName());
-        email.sendKeys(faker.internet().emailAddress());
+
+         firstName.sendKeys(faker.name().firstName());
+         lastName.sendKeys(faker.name().lastName());
+          email.sendKeys(faker.internet().emailAddress());
         password.sendKeys("ANybhj5dgy");
 
         registerButton.click();
