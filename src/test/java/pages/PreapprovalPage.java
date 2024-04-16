@@ -28,10 +28,14 @@ public class PreapprovalPage {
     private WebElement mortgageApplication;
     @FindBy(xpath = "//label[@for='realtor1']")
     private WebElement yesRealtor;
+    @FindBy(xpath = "//label[@for='realtor2']")
+    private WebElement noRealtor;
     @FindBy(name = "realtor_info")
     private WebElement realtorInfo;
     @FindBy(xpath="//label[@for='loanofficer1']")
     private WebElement yesLoanOfficer;
+    @FindBy(xpath = "//select[@data-select2-id='1']")
+    private WebElement purposeLoan;
     @FindBy(id="estimatedprice")
     private WebElement estimatedPrice;
     @FindBy(id="downpayment")
@@ -137,6 +141,9 @@ public class PreapprovalPage {
 
 
     }
+
+
+
     public void econsentInfo(){
         Faker faker = new Faker();
         nameEConsent.sendKeys(faker.name().firstName(), Keys.TAB, faker.name().lastName(), Keys.TAB, faker.internet().emailAddress());
