@@ -1,6 +1,7 @@
 package stepDefinitions.db;
 
 import com.github.javafaker.Faker;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,10 +11,7 @@ import pages.PreapprovalPage;
 import stepDefinitions.SharedData;
 import utilities.DBUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class preapprovalStepDefsDB {
 
@@ -73,5 +71,29 @@ public class preapprovalStepDefsDB {
     }
 
 
+    @Then("the database should ensure that each mortgage application is associated with a unique id")
+    public void theDatabaseShouldEnsureThatEachMortgageApplicationIsAssociatedWithAUniqueIdentifierId() {
+
+       String query = "SELECT id from tbl_mortagage ";
+        List<Map<String, Object>> listOfMaps = DBUtils.getQueryResultListOfMaps(query);
+        System.out.println(listOfMaps);
+
+
+        // Create a set to store unique IDs
+        Set<Object> uniqueIds = new HashSet<>();
+
+        // Iterate over the list of maps and add IDs to the set
+        for (Map<String, Object> map : listOfMaps) {
+            Object id = map.get("id");
+            uniqueIds.add(id);
+        }
+
+        // Check if the number of unique IDs is equal to the number of IDs in the list
+        Assert.assertEquals("Each mortgage application should have a unique ID",
+                listOfMaps.size(), uniqueIds.size());
+
+
+
+    }
 
 }
