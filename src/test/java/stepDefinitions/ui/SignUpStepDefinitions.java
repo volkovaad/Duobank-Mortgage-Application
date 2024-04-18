@@ -19,10 +19,7 @@ import java.time.Duration;
 import java.util.Map;
 @Data
 public class SignUpStepDefinitions {
-    private String first_name_faker;
-    private String last_name_faker;
-    private String email_faker;
-    private String pwd_faker;
+
  //   SharedData sharedData;
 //    public SignUpStepDefinitions(SharedData sharedData) {
 //        this.sharedData = sharedData;
@@ -165,19 +162,7 @@ public class SignUpStepDefinitions {
     }
 
 
-    @When("user signUp with random data")
-    public void signUpwithrandomdataFaker(){
-        Faker faker = new Faker();
-     first_name_faker = (faker.name().firstName());
-        new SignUpPage().getFirstName().sendKeys(first_name_faker);
-     last_name_faker = (faker.name().lastName());
-        new SignUpPage().getLastName().sendKeys(last_name_faker);
-     email_faker = (faker.internet().emailAddress());
-        new SignUpPage().getEmail().sendKeys(email_faker);
-     pwd_faker = "GHnjgh647v";
-        new SignUpPage().getPassword().sendKeys(pwd_faker);
-        new SignUpPage().getRegisterButton().click();
-    }
+
 
 
 

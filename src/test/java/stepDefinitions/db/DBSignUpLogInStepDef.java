@@ -1,5 +1,6 @@
 package stepDefinitions.db;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,12 +21,14 @@ import static utilities.DBUtils.getQueryResultListOfMaps;
 public class DBSignUpLogInStepDef {
     SharedData sharedData;
     SignUpPage signUpPage;
-    SignUpStepDefinitions signUpStepDefinitions;
 
-    public DBSignUpLogInStepDef(SignUpStepDefinitions signUpStepDefinitions){
-        this.signUpStepDefinitions = signUpStepDefinitions;
+  //  public DBSignUpLogInStepDef(SignUpStepDefinitions signUpStepDefinitions){
+    //    this.signUpStepDefinitions = signUpStepDefinitions;
+    //}
+
+    public DBSignUpLogInStepDef(SharedData sharedData) {
+        this.sharedData = sharedData;
     }
-
 
     // Ensure unique email
     @When("a user has an existing account so the database should contain one record with email {string}")
@@ -90,17 +93,24 @@ public class DBSignUpLogInStepDef {
 //  Scenario: Timestamp for user account creation in tbl_users table
      @When("A new user added into tbl_users")
      public void aNewUserAddedIntoTbl_users() throws InterruptedException {
-        signUpStepDefinitions.theUserIsOnTheHomepage();
-        signUpStepDefinitions.theUserClicksOnTheSignUpLink();
-        signUpStepDefinitions.signUpwithrandomdataFaker();
-        Thread.sleep(1000);
+       new SignUpStepDefinitions().theUserIsOnTheHomepage();
+       new SignUpStepDefinitions().theUserClicksOnTheSignUpLink();
+         Faker faker = new Faker();
+         sharedData.setFirst_name_faker (faker.name().firstName());
+         sharedData.setLast_name_faker (faker.name().lastName());
+         sharedData.setEmail_faker(faker.internet().emailAddress());
+         sharedData.setPwd_faker("GHnjgh647v");
+         new SignUpPage().signUp(sharedData.getFirst_name_faker(), sharedData.getLast_name_faker(), sharedData.getEmail_faker(), sharedData.getPwd_faker());
+
+        Thread.sleep(3000);
 }
     @Then("The database should contain a record with a timestamp")
-    public void theDatabaseShouldContainARecordWithATimestamp() {
-        String query = "SELECT created_at FROM tbl_user WHERE email = '" + signUpStepDefinitions.getEmail_faker() + "'";
+    public void theDatabaseShouldContainARecordWithATimestamp() throws SQLException {
+        String query = "SELECT created_at FROM tbl_user WHERE email = '" + sharedData.getEmail_faker() + "'";
         List<List<Object>> queryResult = DBUtils.getQueryResultAsListOfLists(query);
         System.out.println(queryResult);
         Assert.assertTrue(!queryResult.isEmpty());
+
     }
 
 //  Scenario: Passwords are stored as MD5 hash
@@ -122,11 +132,8 @@ public void retrieve_user_s_password_from_the_table() {
 
     // Scenario: Verify Sign Up Information Mapping to tbl_users table
     @When("A new user signs up")
-    public void a_new_user_signs_up() {
-        signUpStepDefinitions.theUserIsOnTheHomepage();
-        signUpStepDefinitions.theUserClicksOnTheSignUpLink();
-        signUpStepDefinitions.signUpwithrandomdataFaker();
-        //Thread.sleep(1000);
+    public void a_new_user_signs_up() throws InterruptedException {
+        aNewUserAddedIntoTbl_users();
 
 
     }
@@ -139,7 +146,7 @@ public void retrieve_user_s_password_from_the_table() {
         String query = String.format("SELECT %s from %s where email='%s'",
                 columnNames,
                 table,
-                signUpStepDefinitions.getEmail_faker()
+                sharedData.getEmail_faker()
         );
         //System.out.println(query);
         List<Map<String, Object>> queryResult = DBUtils.getQueryResultListOfMaps(query);
