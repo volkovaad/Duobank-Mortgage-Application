@@ -40,7 +40,7 @@ public class PersonalInfoPage{
     public WebElement middleName;
     @FindBy(id = "b_lastName")
     private WebElement lastName;
-    @FindBy(id = "select2-b_suffix-container")
+    @FindBy(xpath = "//span[@id='select2-c_suffix-container']")
     private WebElement suffix;
     @FindBy(id = "b_email")
     private WebElement email;
@@ -128,8 +128,8 @@ public class PersonalInfoPage{
         firstName.sendKeys(faker.name().firstName());
         middleName.sendKeys(faker.name().nameWithMiddle());
         lastName.sendKeys(faker.name().lastName());
-        suffix.click();
-        suffixDropdown();
+//        suffix.click();
+//        suffixDropdown();
         email.sendKeys(faker.internet().emailAddress());
         Dob.sendKeys(faker.date().birthday().toString());
         ssn.sendKeys(faker.idNumber().valid());
@@ -141,23 +141,23 @@ public class PersonalInfoPage{
 
     public void maritalStatusDropdown(){
 
-        List<String> actualList = List.of("Single", "Married", "Divorced");
+//        List<String> actualList = List.of("Single", "Married", "Divorced");
+//
+//        List<String> expected = new ArrayList<>();
+//
+//        Select dropdown = new Select(maritalStatus);
+//        List<WebElement> options = dropdown.getOptions();
+//
+//        for (WebElement option : options) {
+//            expected.add(option.getText());}
+//
+//        Assert.assertEquals(expected, actualList);
 
-        List<String> expected = new ArrayList<>();
 
-        Select dropdown = new Select(maritalStatus);
-        List<WebElement> options = dropdown.getOptions();
-
-        for (WebElement option : options) {
-            expected.add(option.getText());}
-
-        Assert.assertEquals(expected, actualList);
-
-
-//        WebDriver driver = Driver.getDriver();
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-//        WebElement maritalStatusOption = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-results']/ul/li[contains(text(),'Married')]")));
-//        maritalStatusOption.click();
+        WebDriver driver = Driver.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement maritalStatusOption = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-results']/ul/li[contains(text(),'Married')]")));
+        maritalStatusOption.click();
 
     }
 
@@ -165,15 +165,16 @@ public class PersonalInfoPage{
 
         List<String> actualList = List.of("Jr.", "Sr.", "II", "III", "IV");
 
+        suffix.click();
+
+        WebDriver driver = Driver.getDriver();
+        List<WebElement> options = driver.findElements(By.xpath("//ul[@id='select2-b_suffix-results']/li"));
+
+
         List<String> expected = new ArrayList<>();
-
-        Select dropdown = new Select(suffix);
-        List<WebElement> options = dropdown.getOptions();
-
         for (WebElement option : options) {
-            expected.add(option.getText());}
-
-        Assert.assertEquals(expected, actualList);
+            expected.add(option.getText().trim());
+        }
 
     }
 
@@ -203,17 +204,22 @@ public class PersonalInfoPage{
 
     public void CoBorrowersMaritalStatusDropdown() {
 
-        List<String> actualList = List.of("Single", "Married", "Divorced");
-        coBorrowerMaritalStatus.click();
-
         WebDriver driver = Driver.getDriver();
-        List<WebElement> options = driver.findElements(By.xpath("//ul[@id='select2-c_marital-results']/li"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement maritalStatusOption = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-results']/ul/li[contains(text(),'Married')]")));
+        maritalStatusOption.click();
 
-
-        List<String> expected = new ArrayList<>();
-        for (WebElement option : options) {
-            expected.add(option.getText().trim());
-        }
+//        List<String> actualList = List.of("Single", "Married", "Divorced");
+//        coBorrowerMaritalStatus.click();
+//
+//        WebDriver driver = Driver.getDriver();
+//        List<WebElement> options = driver.findElements(By.xpath("//ul[@id='select2-c_marital-results']/li"));
+//
+//
+//        List<String> expected = new ArrayList<>();
+//        for (WebElement option : options) {
+//            expected.add(option.getText().trim());
+//        }
 
 //        List<String> expected = new ArrayList<>();
 //

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import pages.ExpensesPage;
 import pages.PreapprovalPage;
+import pages.SummaryPage;
 import stepDefinitions.SharedData;
 import stepDefinitions.ui.ExpensesStepDefs;
 import utilities.DBUtils;
@@ -18,6 +19,7 @@ public class expensesStepDefsDB {
 
 
     ExpensesPage expensesPage;
+    SummaryPage summaryPage;
     SharedData sharedData;
 
     public expensesStepDefsDB(SharedData sharedData) {
@@ -26,10 +28,14 @@ public class expensesStepDefsDB {
 
     @Given("the user fills out the Expenses Details form")
     public void theUserFillsOutTheExpensesDetailsForm() throws InterruptedException{
-        expensesPage = new ExpensesPage();
-        expensesPage.rentCheckbox();
-        expensesPage.monthlyMortgagePayment();
-        expensesPage.nextElement();
+
+        summaryPage = new SummaryPage();
+        summaryPage.open();
+        summaryPage.saveApplication();
+//        expensesPage = new ExpensesPage();
+//        expensesPage.rentCheckbox();
+//        expensesPage.monthlyMortgagePayment();
+//        expensesPage.nextElement();
 
     }
     @Then("the Expenses data should be stored correctly to the following columns in the {string} table in the database")

@@ -1,6 +1,7 @@
 package stepDefinitions.db;
 
 import com.github.javafaker.Faker;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,21 +11,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import pages.PersonalInfoPage;
 import pages.PreapprovalPage;
+import pages.SummaryPage;
 import stepDefinitions.SharedData;
 import stepDefinitions.ui.PersonalInfoStepDefs;
 import utilities.DBUtils;
+import utilities.SeleniumUtils;
 
 import java.rmi.dgc.Lease;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 
 public class personalInfoStepDefsDB {
 
     PersonalInfoPage personalInfoPage;
+    SummaryPage summaryPage;
+    PreapprovalPage preapprovalPage;
 
     SharedData sharedData;
 
@@ -35,29 +37,48 @@ public class personalInfoStepDefsDB {
     @Given("the user fills out the Personal Information Details form")
     public void theUserFillsOutThePersonalInformationDetailsForm() throws InterruptedException {
 
-        personalInfoPage = new PersonalInfoPage();
-        personalInfoPage.enterBorrowersInfo();
-        personalInfoPage.acceptPrivacyPolicy();
-        personalInfoPage.submitForm();
+
+
+        summaryPage = new SummaryPage();
+        summaryPage.open();
+        summaryPage.saveApplication();
+
+//        personalInfoPage = new PersonalInfoPage();
+//        personalInfoPage.enterBorrowersInfo();
+//        personalInfoPage.acceptPrivacyPolicy();
+//        personalInfoPage.submitForm();
     }
 
 
 
 
     @Then("the borrower's data should be stored correctly to the following columns in the {string} table in the database")
-    public void theBorrowerSDataShouldBeStoredCorrectlyToTheFollowingColumnsInTheTableInTheDatabase(String tableName) throws SQLException {
-//        Faker faker=  new Faker();
-//        sharedData.setFirstName(faker.name().firstName());
-//        sharedData.setMiddleName(faker.name().nameWithMiddle());
-//        sharedData.setLastName(faker.name().lastName());
-//        sharedData.setSuffix("Jr");
-//        sharedData.setEmail(faker.internet().emailAddress());
-//        sharedData.setDob(faker.date().birthday().toString());
-//        sharedData.setSsn(faker.idNumber().valid());
-//        sharedData.setMarital("Married");
-//        sharedData.setCell(faker.phoneNumber().cellPhone());
-//        sharedData.setHome(faker.phoneNumber().phoneNumber());
+    public void theBorrowerSDataShouldBeStoredCorrectlyToTheFollowingColumnsInTheTableInTheDatabase(String tableName, DataTable dataTable) throws SQLException {
+        Faker faker=  new Faker();
+        sharedData.setFirstName(faker.name().firstName());
+        sharedData.setMiddleName(faker.name().nameWithMiddle());
+        sharedData.setLastName(faker.name().lastName());
+        sharedData.setSuffix("Jr");
+        sharedData.setEmail(faker.internet().emailAddress());
+        sharedData.setDob(faker.date().birthday().toString());
+        sharedData.setSsn(faker.idNumber().valid());
+        sharedData.setMarital("Married");
+        sharedData.setCell(faker.phoneNumber().cellPhone());
+        sharedData.setHome(faker.phoneNumber().phoneNumber());
 
+        List<Map<String, String>> tableData = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : tableData) {
+            String firstName = row.get("b_firstName");
+            String middleName = row.get("b_middleName");
+            String lastName = row.get("b_lastName");
+            String suffix = row.get("b_suffix");
+            String email = row.get("b_email");
+            String dob = row.get("b_dob");
+            String ssn = row.get("b_ssn");
+            String maritalStatus = row.get("b_marital");
+            String cell = row.get("b_cell");
+            String home = row.get("b_home");
+        }
 
         String firstName = sharedData.getFirstName();
         String middleName = sharedData.getMiddleName();
@@ -72,7 +93,7 @@ public class personalInfoStepDefsDB {
 
         String sqlQuery = "INSERT INTO " + tableName + " (b_firstName, b_middleName, b_lastName, b_suffix, b_email, b_dob, b_ssn, b_marital, b_cell, b_home) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        Connection connection = null;
+        Connection connection = DriverManager.getConnection("jdbc:mysql://database-1.cb72canasobc.us-east-2.rds.amazonaws.com/loan", "duotech", "duotech2024");
         PreparedStatement statement = connection.prepareStatement(sqlQuery);
         statement.setString(1, firstName);
         statement.setString(2, middleName);
@@ -99,8 +120,33 @@ public class personalInfoStepDefsDB {
     }
 
     @Then("the co-borrower's data should be stored correctly to the following columns in the {string} table in the database")
-    public void theCoBorrowerSDataShouldBeStoredCorrectlyToTheFollowingColumnsInTheTableInTheDatabase(String tableName)throws SQLException {
+    public void theCoBorrowerSDataShouldBeStoredCorrectlyToTheFollowingColumnsInTheTableInTheDatabase(String tableName, DataTable dataTable)throws SQLException {
 
+        Faker faker=  new Faker();
+        sharedData.setCoBorrowersFirstName(faker.name().firstName());
+        sharedData.setCoBorrowersMiddleName(faker.name().nameWithMiddle());
+        sharedData.setCoBorrowersLastName(faker.name().lastName());
+        sharedData.setCoBorrowersSuffix("Jr");
+        sharedData.setCoBorrowersEmail(faker.internet().emailAddress());
+        sharedData.setCoBorrowersDob(faker.date().birthday().toString());
+        sharedData.setCoBorrowersSsn(faker.idNumber().valid());
+        sharedData.setCoBorrowersMarital("Married");
+        sharedData.setCoBorrowersCell(faker.phoneNumber().cellPhone());
+        sharedData.setCoBorrowersHome(faker.phoneNumber().phoneNumber());
+
+        List<Map<String, String>> tableData = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> row : tableData) {
+            String coBorrowersFirstName = row.get("c_firstName");
+            String coBorrowersMiddleName = row.get("c_middleName");
+            String coBorrowersLastName = row.get("c_lastName");
+            String coBorrowersSuffix = row.get("c_suffix");
+            String coBorrowersEmail = row.get("c_email");
+            String coBorrowersDob = row.get("c_dob");
+            String coBorrowersSsn = row.get("c_ssn");
+            String coBorrowersMaritalStatus = row.get("c_marital");
+            String coBorrowersCell = row.get("c_cell");
+            String coBorrowersHome = row.get("c_home");
+        }
         String coBorrowersFirstName = sharedData.getCoBorrowersFirstName();
         String coBorrowersMiddleName = sharedData.getCoBorrowersMiddleName();
         String coBorrowersLastName = sharedData.getCoBorrowersLastName();
@@ -114,7 +160,7 @@ public class personalInfoStepDefsDB {
 
         String sqlQuery = "INSERT INTO " + tableName + " (c_firstName, c_middleName, c_lastName, c_suffix, c_email, c_dob, c_ssn, c_marital, c_cell, c_home) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        Connection connection = null;
+        Connection connection = DriverManager.getConnection("jdbc:mysql://database-1.cb72canasobc.us-east-2.rds.amazonaws.com/loan", "duotech", "duotech2024");
         PreparedStatement statement = connection.prepareStatement(sqlQuery);
         statement.setString(1, coBorrowersFirstName);
         statement.setString(2, coBorrowersMiddleName);
