@@ -74,3 +74,6 @@ Feature: Sign up for a bank mortgage application
       | missingdomain@.com   |
       | special@ex@mple.com  |
       | invalid@example.abcd |
+
+
+    When user signUp with random data

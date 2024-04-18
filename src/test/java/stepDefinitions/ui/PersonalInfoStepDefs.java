@@ -21,9 +21,8 @@ public class PersonalInfoStepDefs {
 
 
     @When("I select yes for the co-borrower question")
-    public void iSelectYesForTheCoBorrowerQuestion() {
+    public void iSelectYesForTheCoBorrowerQuestion() throws InterruptedException {
         personalInformationPage.selectCoBorrowerYes();
-
     }
 
     @Then("an additional section for co-borrower's information should be displayed")
@@ -41,7 +40,7 @@ public class PersonalInfoStepDefs {
     }
 
     @And("I fill out the borrower's information")
-    public void iFillOutTheBorrowerSInformation() throws InterruptedException {
+    public void iFillOutTheBorrowerSInformation() {
         personalInformationPage.enterBorrowersInfo();
 
     }
