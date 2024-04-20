@@ -20,11 +20,6 @@ import static utilities.DBUtils.getQueryResultListOfMaps;
 
 public class DBSignUpLogInStepDef {
     SharedData sharedData;
-    SignUpPage signUpPage;
-
-  //  public DBSignUpLogInStepDef(SignUpStepDefinitions signUpStepDefinitions){
-    //    this.signUpStepDefinitions = signUpStepDefinitions;
-    //}
 
     public DBSignUpLogInStepDef(SharedData sharedData) {
         this.sharedData = sharedData;

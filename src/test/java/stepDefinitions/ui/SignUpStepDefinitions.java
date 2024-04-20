@@ -20,10 +20,7 @@ import java.util.Map;
 @Data
 public class SignUpStepDefinitions {
 
- //   SharedData sharedData;
-//    public SignUpStepDefinitions(SharedData sharedData) {
-//        this.sharedData = sharedData;
-//    }
+
 
     @Given("the user is on the login page")
   public void theUserIsOnTheHomepage() {

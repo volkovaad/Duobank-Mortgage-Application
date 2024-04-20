@@ -58,7 +58,7 @@ Feature: Sign up for a bank mortgage application
     Then the user should be redirected to the Sign In page
 
 
-
+  Scenario: User signUp
   @unsuccessful
   Scenario Outline: The user enters invalid email address
     When User enters valid info
