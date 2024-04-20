@@ -9,15 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 
-/**
- * This class represents singleton WebDriver object, use this class's getDriver method everywhere in this
- * framework when you need a driver object
- */
+
 public class Driver {
-
-
-
-
 
     private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
 

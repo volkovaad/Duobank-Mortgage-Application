@@ -1,4 +1,4 @@
-@ui_only
+@ui_to_db
 Feature: Storing Personal Information Details in Database
 
 

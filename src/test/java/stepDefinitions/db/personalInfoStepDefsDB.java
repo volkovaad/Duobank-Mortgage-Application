@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import pages.ExpensesPage;
 import pages.PersonalInfoPage;
 import pages.PreapprovalPage;
 import pages.SummaryPage;
@@ -27,6 +28,7 @@ public class personalInfoStepDefsDB {
     PersonalInfoPage personalInfoPage;
     SummaryPage summaryPage;
     PreapprovalPage preapprovalPage;
+
 
     SharedData sharedData;
 
@@ -108,7 +110,8 @@ public class personalInfoStepDefsDB {
         statement.executeUpdate();
 
         String sqlQuery1 = "SELECT b_firstName, b_middleName, b_lastName, b_suffix, b_email, b_dob, b_ssn, b_marital, b_cell, b_home FROM " + tableName;
-       DBUtils.executeQuery(sqlQuery1);
+      // DBUtils.executeQuery(sqlQuery1);
+       DBUtils.getQueryResultAsListOfLists(sqlQuery1);
 
 
     }

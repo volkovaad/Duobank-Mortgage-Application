@@ -8,15 +8,6 @@ import java.util.List;
 
 public class CSVReader {
 
-    /**
-     *
-     * @param filePath
-     * @return
-     *
-     * This utility reads from a csv file and returns the content as 2D object array to be used in DataProvider
-     */
-
-
 
     public static Object[][] readData(String filePath)  {
 

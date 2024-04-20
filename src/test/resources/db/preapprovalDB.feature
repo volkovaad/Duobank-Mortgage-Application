@@ -1,4 +1,4 @@
-@ui_only
+@ui_to_db
 Feature: Storing Preapproval Details in Database
 
   Scenario: Storing Preapproval Details in Database

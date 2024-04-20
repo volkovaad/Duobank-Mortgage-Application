@@ -23,14 +23,14 @@ public class DBHooks {
     }
 
 
-    @Before ("not @db_only")
+    @Before ("@ui_to_db")
     public void setupScenario(){
         DBUtils.createConnection();
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Driver.getDriver().manage().window().maximize();
     }
 
-    @After ("not @db_only")
+    @After ("@ui_to_db")
     public void tearDownScenario(Scenario scenario){
         if(scenario.isFailed()){
             scenario.attach(((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES), "image/png", "failed");

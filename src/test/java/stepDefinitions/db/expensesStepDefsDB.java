@@ -32,10 +32,10 @@ public class expensesStepDefsDB {
         summaryPage = new SummaryPage();
         summaryPage.open();
         summaryPage.saveApplication();
-//        expensesPage = new ExpensesPage();
-//        expensesPage.rentCheckbox();
-//        expensesPage.monthlyMortgagePayment();
-//        expensesPage.nextElement();
+        expensesPage = new ExpensesPage();
+        expensesPage.rentCheckbox();
+        expensesPage.monthlyMortgagePayment();
+        expensesPage.nextElement();
 
     }
     @Then("the Expenses data should be stored correctly to the following columns in the {string} table in the database")
@@ -62,7 +62,6 @@ public class expensesStepDefsDB {
 
         Map<String, Object> map = queryResult.get(0);
         List<String> actualColumns = new ArrayList<>(map.keySet());
-
         Assert.assertEquals(expectedColumns, actualColumns);
 
     }
