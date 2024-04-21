@@ -7,7 +7,7 @@
         
 
        <classes>
-           <class name="APItests.{classname}"></class>
+           <class name="APItests.UpdateUsers"></class>
 
 
        </classes>
