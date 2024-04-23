@@ -510,6 +510,7 @@ public class DeleteUsers {
                 delete("/user").
                 then().
                 log().all().
+                time(lessThan(2000L)).
                 statusCode(200);
 
 
