@@ -7,7 +7,9 @@
         
 
        <classes>
-           <class name="APItests.UpdateUsers"></class>
+           <class name="APItests.UpdateUsers"/>
+           <class name="APItests.DeleteUsers"/>
+
 
 
        </classes>
