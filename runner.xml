@@ -4,13 +4,16 @@
 
     <test name="Rest Assured Automated Tests">
 
-        
+
 
        <classes>
-           <class name="APItests.{classname}"></class>
+           <class name="APItests.testPatchUser">
+
+           </class>
 
 
        </classes>
+
 
 
     </test>
