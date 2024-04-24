@@ -1,24 +1,9 @@
 package APItests;
 import com.github.javafaker.Faker;
-import io.cucumber.java.sl.In;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
-import org.openqa.selenium.json.Json;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import utilities.ConfigReader;
-import utilities.Driver;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
 
 
 public class UpdateUsers {
