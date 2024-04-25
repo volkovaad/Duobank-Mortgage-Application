@@ -4,13 +4,22 @@
 
     <test name="Rest Assured Automated Tests">
 
-        
+
 
        <classes>
+
            <class name="APItests.GetUsersAPI"></class>
+           <class name="APItests.UpdateUsers"/>
+           <class name="APItests.DeleteUsers"/>
+           <class name="APItests.testPatchUser">
+
+           </class>
+
+
 
 
        </classes>
+
 
 
     </test>
