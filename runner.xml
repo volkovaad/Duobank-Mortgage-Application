@@ -7,9 +7,14 @@
 
 
        <classes>
+
+
+           <class name="APItests.UpdateUsers"/>
+           <class name="APItests.DeleteUsers"/>
            <class name="APItests.testPatchUser">
 
            </class>
+
 
 
        </classes>
