@@ -124,4 +124,23 @@ public class DBUtils {
         return rowCount;
     }
 
+    // get value + establish connection (for testNG )
+    public static int getSingleIntValue(String query) {
+        int result = 0;
+
+        createConnection();
+       try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            if (resultSet.next()) {
+                result = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }      close();
+
+        return result;
+    }
+
 }
