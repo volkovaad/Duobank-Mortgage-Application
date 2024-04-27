@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.*;
 public class GetUsersAPI {
 
     @BeforeClass
-    public void setupClass(){
+    public void setupClass() {
         RestAssured.baseURI = "http://qa-duobank.us-east-2.elasticbeanstalk.com/api";
     }
 
@@ -39,10 +39,10 @@ public class GetUsersAPI {
 
         RequestSpecification requestSpecification = given().
                 header("Accept", "application/json").
-        //header("X-Total-Count", String.valueOf(expectedTotalUsers)).
-                queryParam("limit", limit).
+                header("X-Total-Count", String.valueOf(expectedTotalUsers)).
+                        queryParam("limit", limit).
                 //   queryParam("per-page", 3).
-                 queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3");
+                queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3");
         Response response = requestSpecification.when().
                 log().all().
                 get("/users");
@@ -52,7 +52,7 @@ public class GetUsersAPI {
                 statusCode(200).
                 header("content-type", "application/json").
                 body("size()", is(expectedTotalUsers)).
-        //body("$", hasSize(limit)).
+               // body("$", hasSize(limit)).
                 time(lessThan(2000L));
 
         Map<String, Object> map = response.jsonPath().getMap("[0]");
@@ -65,30 +65,30 @@ public class GetUsersAPI {
         Assert.assertEquals(actualColumns, expectedColumns);
     }
 
-        @Test
-        public void testGETUSERS_negative(){
+    @Test
+    public void testGETUSERS_negative() {
 
-            //negative - no key (401)
+        //negative - no key (401)
         given().
                 header("Accept", "application/json").
-               // queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
-        when().
+                // queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
+                        when().
                 log().all().
                 get("/users").
-        then().
+                then().
                 log().all().
                 statusCode(401);
 
-            //negative - wrong request (405)
-       given().
-                    header("Accept", "application/json").
-                    queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
-      when().
-                    log().all().
-                    post("/users").
-      then().
-                    log().all().
-                    statusCode(405);
+        //negative - wrong request (405)
+        given().
+                header("Accept", "application/json").
+                queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
+                when().
+                log().all().
+                post("/users").
+                then().
+                log().all().
+                statusCode(405);
 
 
     }
@@ -96,34 +96,69 @@ public class GetUsersAPI {
 
     @Test
     public void testGETUSER() {
- given().
+        given().
                 header("Accept", "application/json").
                 queryParam("id", 12283).
                 queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
-   when().
+                when().
                 log().all().
                 get("/user").
-   then().
+                then().
                 log().all().
-                header("cache-control" ,"no-store, no-cache, must-revalidate").
-                header("content-type"  ,"application/json").
+                header("cache-control", "no-store, no-cache, must-revalidate").
+                header("content-type", "application/json").
                 time(lessThan(2000L)).
                 statusCode(200);
 
     }
 
 
+    @Test
+    public void testGETUSERNotexcistingID() {
+        given().
+                header("Accept", "application/json").
+                queryParam("id", 1983745).
+                queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
+                when().
+                log().all().
+                get("/user").
+                then().
+                log().all().
+                header("cache-control", "no-store, no-cache, must-revalidate").
+                header("content-type", "application/json").
+                time(lessThan(2000L)).
+                statusCode(404);
+
+    }
+
+    @Test
+    public void testGETUSERNoID() {
+        given().
+                header("Accept", "application/json").
+                queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
+                when().
+                log().all().
+                get("/user").
+                then().
+                log().all().
+                time(lessThan(2000L)).
+                statusCode(400);
+
+    }
+
+
     Object returnedvalue;
+
     @Test
     public void testPOSTUSER() {
- returnedvalue =    given().
+        returnedvalue = given().
                 body(fakerDataBody()).
                 header("Accept", "application/json").
                 queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
-            when().
+                when().
                 log().all().
                 post("/user").
-            then().
+                then().
                 log().all().
                 header("cache-control", "no-store, no-cache, must-revalidate").
                 header("content-type", "application/json").
@@ -132,7 +167,7 @@ public class GetUsersAPI {
 
 
         // check if user has been created with GET
-      given().
+        given().
                 header("Accept", "application/json").
                 queryParam("id", returnedvalue).
                 queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
@@ -142,6 +177,48 @@ public class GetUsersAPI {
                 then().
                 log().all().
                 statusCode(200);
+    }
+
+    @Test
+    public void testPOSTUSERwithNoKEY() {
+        returnedvalue = given().
+                body(fakerDataBody()).
+                header("Accept", "application/json").
+                when().
+                log().all().
+                post("/user").
+                then().
+                log().all().
+                statusCode(401);
+    }
+
+    @Test
+    public void POSTUserwithlolastName422() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+
+
+        String formattedBody = String.format("""
+                {
+                  "username": "coolherc",
+                  "first_name": "%s",
+                  "email": "Somatossfantomastom28@gmail.com"        
+                }
+                """, firstName + UUID.randomUUID());
+        System.out.println(formattedBody);
+        given().
+                body(formattedBody).
+                header("Accept", "application/json").
+                header("Content-type", "application/json").
+                queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
+                queryParam("id", "30").
+                when().
+                log().all().
+                post("/user").
+                then().
+                log().all().
+                statusCode(422);
+
     }
 
     @Test
@@ -161,6 +238,34 @@ public class GetUsersAPI {
                 time(lessThan(2000L));
     }
 
+    @Test
+    public void PUTupdateUserwithlolastName422() {
+        Faker faker = new Faker();
+        String firstName = faker.name().firstName();
+
+
+        String formattedBody = String.format("""
+                {
+                  "username": "coolherc",
+                  "first_name": "%s",
+                  "email": "Somatossfantomastom28@gmail.com"        
+                }
+                """, firstName + UUID.randomUUID());
+        System.out.println(formattedBody);
+        given().
+                body(formattedBody).
+                header("Accept", "application/json").
+                header("Content-type", "application/json").
+                queryParam("api_key", "c8a912d7d1c5a5a99c508f865b5eaae14a5b484f5bfe2d8f48c40e46289b47f3").
+                queryParam("id", "30").
+                when().
+                log().all().
+                put("/user").
+                then().
+                log().all().
+                statusCode(422);
+
+    }
 
 
     @Test
@@ -169,7 +274,7 @@ public class GetUsersAPI {
         testPOSTUSER();
         String newEmail = new Faker().internet().emailAddress();
         given().
-                body( String.format("""
+                body(String.format("""
                         {
                           "email": "%s"
                         }
@@ -204,7 +309,7 @@ public class GetUsersAPI {
     public void testDELETEUSER() {
         //create user
 
-         testPOSTUSER();
+        testPOSTUSER();
         //delete user
         given().
                 header("Accept", "application/json").
@@ -216,8 +321,8 @@ public class GetUsersAPI {
                 then().
                 log().all().
                 statusCode(200).
-                header("cache-control" ,"no-store, no-cache, must-revalidate").
-                header("content-type"  ,"application/json").
+                header("cache-control", "no-store, no-cache, must-revalidate").
+                header("content-type", "application/json").
                 time(lessThan(2000L));
 
         // check if user has been deleted with GET
@@ -238,24 +343,23 @@ public class GetUsersAPI {
     String first;
     String last;
 
-    public String fakerDataBody(){
+    public String fakerDataBody() {
         Faker faker = new Faker();
 
-         email = faker.internet().emailAddress();
-         first   = faker.name().firstName();
-         last = faker.name().lastName();
+        email = faker.internet().emailAddress();
+        first = faker.name().firstName();
+        last = faker.name().lastName();
 
         String formattedBody = String.format("""
-                          {
-                          "first_name": "%s",
-                          "last_name": "%s",
-                          "email": "%s",
-                          "password": "Hgybkj34bj!j"
-                        }""", first,last,email);
+                  {
+                  "first_name": "%s",
+                  "last_name": "%s",
+                  "email": "%s",
+                  "password": "Hgybkj34bj!j"
+                }""", first, last, email);
 
         //System.out.println(formattedBody);
         return formattedBody;
     }
-
 
 }

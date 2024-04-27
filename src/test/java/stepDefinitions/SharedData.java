@@ -1,7 +1,11 @@
 package stepDefinitions;
 
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import lombok.Data;
 import org.openqa.selenium.WebElement;
+
+import static io.restassured.RestAssured.given;
 
 @Data
 public class SharedData {
@@ -44,5 +48,9 @@ public class SharedData {
    private String last_name_faker;
    private String email_faker;
    private String pwd_faker;
+
+
+   private RequestSpecification requestSpecification = given();
+   private Response response;
 
 }

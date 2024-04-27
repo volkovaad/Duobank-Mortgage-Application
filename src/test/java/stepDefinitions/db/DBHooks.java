@@ -3,8 +3,10 @@ package stepDefinitions.db;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import utilities.ConfigReader;
 import utilities.DBUtils;
 import utilities.Driver;
 
@@ -12,7 +14,19 @@ import java.time.Duration;
 
 public class DBHooks {
 
-    @Before ("@db_only")
+    @Before ("@api")
+    public void setupAPI(){
+        RestAssured.baseURI = ConfigReader.getProperty("api.base.uri");
+    }
+
+    @After ("@api")
+    public void tearDownApi(Scenario scenario) {
+        if (scenario.isFailed()) {
+            //TODO
+        }
+    }
+
+        @Before ("@db_only")
     public void db(){
         DBUtils.createConnection();
     }
