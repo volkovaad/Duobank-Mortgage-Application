@@ -18,4 +18,10 @@ public class userInfo {
     private String last_name;
     private String email;
     private String password;
+    private String id;
+    private String created_at;
+    private String modified_at;
+    private String type;
+    private String active;
 }
+

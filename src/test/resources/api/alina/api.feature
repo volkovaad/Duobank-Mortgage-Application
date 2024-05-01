@@ -72,6 +72,7 @@ Scenario: POST user
   Then the response log should be displayed
   Then the response status code should be 200
   And the response time should be less than 2000 ms
+  And extract body as a user class
 
   #  PATCH USER
   Scenario: PATCH user
