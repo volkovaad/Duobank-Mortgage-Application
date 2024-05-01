@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.time.LocalDateTime;
 import java.util.UUID;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
+//import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
@@ -24,7 +24,7 @@ public class testPatchUser {
     }
 
     @Test
-    public void testPatchUser()  {
+    public void testPatchUser1()  {
         Faker faker = new Faker();
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
@@ -232,9 +232,6 @@ public class testPatchUser {
                 time(lessThan(2000L));
 
     }
-
-
-
 
 
     }
