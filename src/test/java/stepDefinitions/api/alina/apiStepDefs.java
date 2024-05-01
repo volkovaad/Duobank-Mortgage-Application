@@ -169,4 +169,9 @@ SharedData sharedData;
         sharedData.getRequestSpecification().queryParam("id", id);
 
     }
+
+    @And("extract body as a user class")
+    public void extractBosyAsAUserClass() {
+        sharedData.getResponse().then().log().all().extract().as(userInfo.class);
+    }
 }
