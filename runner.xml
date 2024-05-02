@@ -8,14 +8,10 @@
 
        <classes>
 
-           <class name="APItests.GetUsersAPI"></class>
+           <class name="APItests.GetUsersAPI"/>
            <class name="APItests.UpdateUsers"/>
            <class name="APItests.DeleteUsers"/>
-           <class name="APItests.testPatchUser">
-
-           </class>
-
-
+           <class name="APItests.testPatchUser"/>
 
 
        </classes>

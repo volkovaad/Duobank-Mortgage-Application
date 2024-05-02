@@ -143,4 +143,53 @@ public class DBUtils {
         return result;
     }
 
+    // get map + establish connection (for testNG )
+    public static List <Map<String, Object>>  getqueryasasAMAPwithconnection(String query) {
+        List<Map<String, Object>> rowList = new ArrayList<>();
+        ResultSetMetaData rsmd;
+        createConnection();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            rsmd = resultSet.getMetaData();
+            while (resultSet.next()) {
+                Map<String, Object> colNameValueMap = new LinkedHashMap<>();
+                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                    colNameValueMap.put(rsmd.getColumnName(i), resultSet.getObject(i));
+                }
+                rowList.add(colNameValueMap);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return rowList;
+    }
+
+
+    // get list + establish connection (for testNG )
+    public static List<List<Object>>  getqueryasasALISTwithconnection(String query) {
+        List<List<Object>> rowList = new ArrayList<>();
+        ResultSetMetaData rsmd;
+        createConnection();
+        try {
+            statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            rsmd = resultSet.getMetaData();
+            while (resultSet.next()) {
+                List<Object> row = new ArrayList<>();
+                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                    row.add(resultSet.getObject(i));
+                }
+                rowList.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        close();
+        return rowList;
+    }
+
 }

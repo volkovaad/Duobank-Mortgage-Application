@@ -24,7 +24,7 @@ public class testPatchUser {
     }
 
     @Test
-    public void testPatchUser()  {
+    public void testPatchUser1()  {
         Faker faker = new Faker();
         String firstName = faker.name().firstName();
         String lastName = faker.name().lastName();
@@ -232,9 +232,6 @@ public class testPatchUser {
                 time(lessThan(2000L));
 
     }
-
-
-
 
 
     }

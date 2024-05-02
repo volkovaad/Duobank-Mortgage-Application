@@ -5,6 +5,8 @@ import io.restassured.specification.RequestSpecification;
 import lombok.Data;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 
 @Data
@@ -37,6 +39,7 @@ public class SharedData {
    private String coBorrowersMarital;
    private String coBorrowersCell;
    private String coBorrowersHome;
+   private String password;
 
 
    private String rentCheckbox;
@@ -53,5 +56,12 @@ public class SharedData {
    private RequestSpecification requestSpecification = given();
    private Response response;
    private String JWToken;
+
+   private int user_id;
+   private List<String> appID;
+
+   String emailCreated;
+   String passwordCreated;
+
 
 }
